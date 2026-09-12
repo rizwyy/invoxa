@@ -2,6 +2,8 @@
 
 Invoice management for Indian small businesses: upload a supplier bill, review its details, and track payment. Nuxt 4, Vue, TypeScript and Tailwind CSS, with a working local backend and separate AWS Lambda adapters.
 
+![Invoxa before-and-after workflow](docs/portfolio/invoxa-before-after.png)
+
 **Status:** local core workflow implemented and tested. AWS integration code is supplied but has not been deployed or verified in a real AWS account. Do not describe this as a production-ready accounting platform.
 
 ## Run locally
