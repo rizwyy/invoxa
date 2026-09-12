@@ -10,7 +10,7 @@ onMounted(async () => {
     if (!tokens.access_token) throw new Error('No access token returned')
     sessionStorage.setItem('invoxa_access', tokens.access_token)
     window.history.replaceState({}, '', '/auth/callback')
-    const { account, load } = useAccount(); await load(); await navigateTo(account.value?.workspace ? '/' : '/onboarding', { replace: true })
+    const { account, load } = useAccount(); await load(); await navigateTo(account.value?.workspace ? '/dashboard' : '/onboarding', { replace: true })
   } catch (e: any) { sessionStorage.removeItem('invoxa_access'); error.value = e.message || 'Unable to finish sign-in' }
 })
 </script>

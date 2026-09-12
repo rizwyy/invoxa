@@ -15,7 +15,7 @@ npm ci
 npm run dev -- --host 127.0.0.1
 ```
 
-Open the URL printed by Nuxt. Choose **Create a test account**, enter a test email and a unique password of at least 12 characters, and name your workspace. No email verification is sent locally. Upload `docs/samples/sample-invoice.pdf` for a synthetic test.
+Open the URL printed by Nuxt to see the public homepage. Open **Sign in**, then choose **Create a test account**, enter a test email and a unique password of at least 12 characters, and name your workspace. The protected workspace overview is at `/dashboard`; `/` remains the public homepage. No email verification is sent locally. Upload `docs/samples/sample-invoice.pdf` for a synthetic test.
 
 Data and password hashes persist in `.data/` across refreshes/restarts; session cookies last 24 hours. This directory is ignored by Git and should stay private. The local backend allows only loopback hosts, requires matching request Origin for writes, and is intended for one process on one computer. No AWS services are called in local mode. Do not publicly deploy local mode or use it for production financial records.
 
