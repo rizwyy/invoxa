@@ -1,0 +1,11 @@
+import tailwindcss from '@tailwindcss/vite'
+export default defineNuxtConfig({
+  compatibilityDate: '2026-09-07',
+  ssr: false,
+  runtimeConfig: { public: { appMode: 'local', apiBase: '', cognitoDomain: '', cognitoClientId: '' } },
+  routeRules: { '/**': { headers: { 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'no-referrer', 'X-Frame-Options': 'DENY' } } },
+  devtools: { enabled: false },
+  css: ['~/assets/css/main.css'],
+  vite: { plugins: [tailwindcss()] },
+  app: { head: { title: 'Invoxa · Invoice workspace', meta: [{ name: 'description', content: 'A local prototype for reviewing and organizing supplier invoices.' }] } },
+})

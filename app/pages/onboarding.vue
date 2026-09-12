@@ -1,0 +1,5 @@
+<script setup lang="ts">
+const name = ref(''); const busy = ref(false); const error = ref(''); const api = useApi(); const { load } = useAccount()
+async function submit() { busy.value = true; error.value = ''; try { await api('/workspace', { method: 'POST', body: { name: name.value } }); await load(); await navigateTo('/') } catch (e: any) { error.value = e.message } finally { busy.value = false } }
+</script>
+<template><section class="panel onboarding"><p class="eyebrow">MAKE IT YOURS</p><h1>Name your business</h1><p class="form-intro">Your invoices and payment records will belong to this workspace. This pilot supports one business and one owner per account.</p><form @submit.prevent="submit"><label>Business name<input v-model="name" minlength="2" maxlength="100" required placeholder="e.g. Sunrise Studio"></label><p v-if="error" class="error" role="alert">{{ error }}</p><button class="button" :disabled="busy">{{ busy ? 'Creating…' : 'Create workspace' }} →</button></form></section></template>

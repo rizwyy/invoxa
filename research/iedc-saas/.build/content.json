@@ -1,0 +1,639 @@
+{
+  "sources": [
+    {
+      "id": 1,
+      "publisher": "IEDC Summit",
+      "title": "Summit 2026",
+      "url": "https://iedcsummit.in/",
+      "date": "Live page"
+    },
+    {
+      "id": 2,
+      "publisher": "IEDC Summit",
+      "title": "Events and pitching competition terms",
+      "url": "https://iedcsummit.in/events",
+      "date": "Live page"
+    },
+    {
+      "id": 3,
+      "publisher": "Razorpay",
+      "title": "Fix My Itch",
+      "url": "https://razorpay.com/m/fix-my-itch/",
+      "date": "Live page"
+    },
+    {
+      "id": 4,
+      "publisher": "Zoho Practice",
+      "title": "Creating Client Requests",
+      "url": "https://www.zoho.com/practice/help/client-requests/creating-client-requests.html",
+      "date": "Undated documentation"
+    },
+    {
+      "id": 5,
+      "publisher": "Content Snare",
+      "title": "Pricing and plans",
+      "url": "https://contentsnare.com/pricing/",
+      "date": "Live pricing"
+    },
+    {
+      "id": 6,
+      "publisher": "Zoho Books",
+      "title": "India pricing",
+      "url": "https://www.zoho.com/in/books/pricing/",
+      "date": "Live pricing"
+    },
+    {
+      "id": 7,
+      "publisher": "Zoho FSM",
+      "title": "Assets and maintenance",
+      "url": "https://www.zoho.com/fsm/assets.html",
+      "date": "Undated product page"
+    },
+    {
+      "id": 8,
+      "publisher": "Zoho FSM",
+      "title": "Pricing",
+      "url": "https://www.zoho.com/fsm/pricing.html",
+      "date": "Live pricing"
+    },
+    {
+      "id": 9,
+      "publisher": "Zoho FSM",
+      "title": "OnGuard Security Solutions case study",
+      "url": "https://www.zoho.com/fsm/customers/onguard-security-solutions.html",
+      "date": "Undated vendor case study"
+    },
+    {
+      "id": 10,
+      "publisher": "Clearstory",
+      "title": "Change order management",
+      "url": "https://www.clearstory.build/",
+      "date": "Live product page"
+    },
+    {
+      "id": 11,
+      "publisher": "Clayco",
+      "title": "E Subcontract",
+      "url": "https://claycorp.com/wp-content/uploads/2025/06/Clayco-E-Subcontract-2025-04-01.pdf",
+      "date": "1 April 2025"
+    },
+    {
+      "id": 12,
+      "publisher": "Powerplay",
+      "title": "Construction contract management",
+      "url": "https://www.getpowerplay.in/construction-contract-management-software/",
+      "date": "Undated product page"
+    },
+    {
+      "id": 13,
+      "publisher": "C2FO",
+      "title": "Delayed Payments Report 3.0 overview",
+      "url": "https://c2fo.com/resources/working-capital/delayed-payments-report-3-0-a-national-view-of-msme-payment-delays/",
+      "date": "25 November 2025"
+    },
+    {
+      "id": 14,
+      "publisher": "CredFlow",
+      "title": "Cashflow management software",
+      "url": "https://saas.credflow.in/",
+      "date": "Live product page"
+    },
+    {
+      "id": 15,
+      "publisher": "Capterra",
+      "title": "Chaser user reviews",
+      "url": "https://www.capterra.com/p/157101/CHASER/reviews/",
+      "date": "Page updated 26 August 2026; many reviews older"
+    },
+    {
+      "id": 16,
+      "publisher": "Paperless Parts",
+      "title": "Facts about the product",
+      "url": "https://www.paperlessparts.com/facts/",
+      "date": "Undated product page"
+    },
+    {
+      "id": 17,
+      "publisher": "Paperless Parts",
+      "title": "Quote setup solution brief",
+      "url": "https://www.paperlessparts.com/wp-content/uploads/quote-setup-solution-brief.pdf",
+      "date": "Undated vendor brief"
+    },
+    {
+      "id": 18,
+      "publisher": "SuperProcure",
+      "title": "Logistics platform",
+      "url": "https://www.superprocure.com/platform/",
+      "date": "Live product page"
+    },
+    {
+      "id": 19,
+      "publisher": "SuperProcure",
+      "title": "Proof of delivery plans",
+      "url": "https://www.superprocure.com/pricing/proof-of-delivery/",
+      "date": "Live pricing page"
+    },
+    {
+      "id": 20,
+      "publisher": "FSSAI",
+      "title": "Hygiene Rating Scheme",
+      "url": "https://www.fssai.gov.in/hygiene-rating-about?csrt=8073011034210565875",
+      "date": "Official scheme page"
+    },
+    {
+      "id": 21,
+      "publisher": "FSSAI",
+      "title": "Published food service hygiene checklist",
+      "url": "https://hygiene.fssai.gov.in/files/docs/67839_checklist_compressed.pdf",
+      "date": "Published checklist example"
+    },
+    {
+      "id": 22,
+      "publisher": "SafetyCulture",
+      "title": "Operations platform",
+      "url": "https://safetyculture.com/platform/",
+      "date": "Undated product page"
+    },
+    {
+      "id": 23,
+      "publisher": "Unicommerce",
+      "title": "UniReco documentation",
+      "url": "https://support.unicommerce.com/index.php/knowledge-base/unireco/",
+      "date": "Undated product documentation"
+    },
+    {
+      "id": 24,
+      "publisher": "Unicommerce",
+      "title": "UniReco product",
+      "url": "https://unicommerce.com/products/payment-reconciliation-solution-unireco/",
+      "date": "Live product page"
+    },
+    {
+      "id": 25,
+      "publisher": "Conveyor",
+      "title": "Pricing",
+      "url": "https://www.conveyor.com/pricing",
+      "date": "Live pricing"
+    },
+    {
+      "id": 26,
+      "publisher": "Conveyor",
+      "title": "Security questionnaire automation",
+      "url": "https://www.conveyor.com/products/security-questionnaire-automation",
+      "date": "Live product page"
+    },
+    {
+      "id": 27,
+      "publisher": "European Commission",
+      "title": "CBAM definitive regime",
+      "url": "https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism/cbam-definitive-regime_en",
+      "date": "Current official guidance"
+    },
+    {
+      "id": 28,
+      "publisher": "CarbonChain",
+      "title": "CBAM supplier catalogue",
+      "url": "https://www.carbonchain.com/blog/introducing-carbonchain-cbam-supplier-catalogue",
+      "date": "Vendor product announcement"
+    },
+    {
+      "id": 29,
+      "publisher": "Practo",
+      "title": "Ray clinic software",
+      "url": "https://www.practo.com/providers/clinics/ray",
+      "date": "Live product page"
+    },
+    {
+      "id": 30,
+      "publisher": "TripDrafts",
+      "title": "Travel agency software pricing",
+      "url": "https://tripdrafts.com/pricing",
+      "date": "Live pricing"
+    },
+    {
+      "id": 31,
+      "publisher": "ManageEngine",
+      "title": "SaaS Manager Plus pricing",
+      "url": "https://www.manageengine.com/saas-management/pricing.html",
+      "date": "Live pricing"
+    },
+    {
+      "id": 32,
+      "publisher": "IEDC Summit",
+      "title": "Schedule",
+      "url": "https://iedcsummit.in/schedule",
+      "date": "Sample schedule, final details TBA"
+    }
+  ],
+  "labels": [
+    "Target customer",
+    "Painful problem and trigger",
+    "Current alternatives",
+    "Frequency and severity",
+    "Willingness to pay evidence",
+    "Customer access and distribution",
+    "Competition and differentiation",
+    "Riskiest assumption",
+    "Cheapest validation experiment",
+    "Smallest viable paid solution",
+    "Pricing and unit economics",
+    "Recommendation"
+  ],
+  "ideas": [
+    {
+      "name": "Month-end document readiness",
+      "short": "Accounting document readiness",
+      "raw": [
+        4,
+        4,
+        4.5,
+        4.5,
+        2.5,
+        4,
+        4
+      ],
+      "score": 80.0,
+      "refs": [
+        4,
+        5,
+        6
+      ],
+      "left": "Buyer: bookkeeping and CA firms with 50–200 recurring business clients.\n\nProblem: staff chase missing statements and invoices before closing the books.\n\nProposed gap: one view of missing, received and accountant-approved documents across clients.",
+      "right": "First offer: run one month-end cycle for 20 clients.\n\nTest price: ₹3,000–₹6,000 per firm per month.\n\nWin condition: two firms pay and repeat usage, with less staff chasing.\n\nMain threat: existing practice software may already solve it.",
+      "details": [
+        "Owner or operations manager of an Indian bookkeeping or CA firm serving 50–200 recurring business clients. Begin with firms using mixed accounting systems and shared folders, rather than assuming every accountant has this problem.",
+        "The trigger is an approaching monthly close with incomplete customer files. The hypothesis is that staff cannot quickly distinguish documents still missing from documents received but unusable. A client-level exception queue might save coordination time.",
+        "Email, WhatsApp, shared drives, spreadsheets, staff follow-up calls and existing practice-management products. These are familiar and cheap. Any new product must prove a gain over a configured existing tool.",
+        "Monthly recurring work with daily peaks around closing periods is an interview hypothesis. Measure actual minutes spent and the number of clients blocked. Do not quote a universal ten-hours-per-week saving.",
+        "Content Snare advertises paid document-collection plans, including Basic at US$35/month billed annually or US$42 monthly [5]. This establishes a paid category, not Indian firms’ willingness to buy this offer. Zoho documents a client-request workflow [4]. No pilot commitments exist yet.",
+        "Build a list of 30 local firms from public business directories and introductions. Interview the partner and the staff member who does the chasing. Sell to one firm that brings multiple client workflows, rather than separately acquiring every microbusiness. This access route is proposed, not secured.",
+        "Content Snare, Zoho Practice and the firm’s existing software are direct alternatives. Zoho’s documented request feature requires a linked Zoho client organization [4]. Test cross-system readiness tracking and exceptionally easy client submission as the wedge. Do not claim all competing features are absent.",
+        "Clients might ignore another upload link, or missing records may reflect poor customer discipline that software cannot fix. Firms may prefer paying for setup of existing software. Financial-document handling also creates a real trust barrier.",
+        "Interview ten firms, then manually run one closing cycle for two paying firms, covering 20 clients each. Use customer-approved storage and a status register. Compare staff chasing time and completion rates with the previous cycle. Proceed only if both firms want another paid cycle and staff time falls at least 30%. The thresholds are decision rules, not predictions.",
+        "Client checklist templates, secure upload links, per-document acceptance/rejection, reminders and a firm-wide exception queue. Keep accountants responsible for readiness decisions. Exclude tax filing, bookkeeping, universal OCR, autonomous financial advice and a complete practice suite.",
+        "Pricing hypothesis: ₹3,000–₹6,000 per firm/month, with client and storage limits. Model ₹4,000 revenue minus ₹500 hosting/storage/messages and ₹1,000 delivery labour, leaving ₹2,500 contribution. Assumed labour is two hours at ₹500/hour. Onboarding is separate and acquisition cost remains unmeasured.",
+        "TEST FIRST. Highest rank reflects distribution through a firm and a cheap manual experiment. Choose this only if ten firms can be reached quickly. Pivot to an implementation service if existing tools solve the problem after setup."
+      ],
+      "price": 4000,
+      "cost": 1500,
+      "reason": "Reachable buyer, recurring work and low-cost manual test",
+      "confidence": "Medium",
+      "rank": 1
+    },
+    {
+      "name": "Maintenance contract renewals",
+      "short": "Maintenance renewals",
+      "raw": [
+        4,
+        3.5,
+        4,
+        4.5,
+        3,
+        4.5,
+        4.5
+      ],
+      "score": 79.0,
+      "refs": [
+        7,
+        8,
+        9
+      ],
+      "left": "Buyer: AC service contractors with 5–20 technicians and recurring maintenance contracts.\n\nProblem: renewal dates and promised visits disappear between office records and field work.\n\nProposed gap: a daily action list tied to each customer’s contract.",
+      "right": "First offer: import 100 contracts and manage the next month’s due visits and renewals.\n\nTest price: ₹2,000–₹5,000 per company per month.\n\nWin condition: two paid pilots and independently confirmed overdue actions.\n\nMain threat: Zoho FSM already supports maintenance plans.",
+      "details": [
+        "Owner of a local AC maintenance contractor with 5–20 technicians and at least 100 active service contracts. AC is the starting vertical. Do not simultaneously target solar, elevators, security, plumbing and every service trade.",
+        "A renewal becomes due or a promised visit has not happened. The proposed product makes the next action explicit and connects the visit record to renewal follow-up. The business case is retained contract revenue and less office administration.",
+        "Excel renewal registers, diaries, staff calls, WhatsApp groups and field-service software. Office staff may already manage the work adequately. Observe their last week before proposing replacement.",
+        "Contract renewal is annual, but a sufficiently large contract book creates recurring weekly actions. Visit frequency depends on each agreement. Low-volume contractors may only need a spreadsheet and should be excluded.",
+        "Zoho FSM sells this category, publishes maintenance-plan features, and presents an OnGuard implementation case [7–9]. This shows adoption of related workflows. It does not establish the proposed Indian AC niche’s payment level or a local market gap.",
+        "Recruit through AC dealers, local contractor listings and equipment distributors. Offer a paid cleanup of a real renewal register. Dealers could become referral partners after repeatable outcomes, but no partnership is established.",
+        "Zoho FSM is a strong competitor with asset and maintenance features, so generic scheduling is insufficient. Test whether assisted onboarding and a narrow renewal workflow outperform the contractor’s current setup. A Malayalam interface alone is easy to copy.",
+        "Lost renewals may result from price or poor service rather than forgotten dates. Technicians may not record visits. Adoption that requires continual founder chasing would create a service business with weak margins.",
+        "Interview eight owners. Audit 100 consented contract records at two businesses, then run reminders and visit tracking manually for two weeks. Charge ₹2,000 each. Look for at least three genuine overdue actions per firm and agreement to continue. Measure accepted renewals over a full cycle before claiming revenue improvement.",
+        "Contract import, due-date queue, technician visit confirmation, renewal status and customer service history. Use a mobile web form before a native app. Exclude dispatch optimization, spare-parts ERP, IoT diagnostics and a technician marketplace.",
+        "Test ₹2,000–₹5,000/month plus a one-time migration fee. At ₹3,000/month, assume ₹350 infrastructure/messages and ₹750 support labour, leaving ₹1,900 contribution. The labour model assumes 1.5 hours/month at ₹500/hour. Heavy manual renewal calling needs a separate service price.",
+        "TEST FIRST if local contractor access is easier than accounting-firm access. Strong retention potential comes from an accumulated contract record, but a recurring spreadsheet may be sufficient for the smallest firms."
+      ],
+      "price": 3000,
+      "cost": 1100,
+      "reason": "Clear local buyer and recurring revenue workflow",
+      "confidence": "Medium",
+      "rank": 2
+    },
+    {
+      "name": "Extra-work approvals for contractors",
+      "short": "Construction extra-work approvals",
+      "raw": [
+        4.5,
+        4,
+        3.5,
+        4,
+        3,
+        4,
+        3.5
+      ],
+      "score": 78.5,
+      "refs": [
+        10,
+        11,
+        12
+      ],
+      "left": "Buyer: interior fit-out and electrical subcontractors running 3–10 sites.\n\nProblem: verbal changes become disputed or forgotten bill items.\n\nProposed gap: capture the request, priced scope and approval evidence before invoicing.",
+      "right": "First offer: reconstruct 20 recent changes and manage one active project.\n\nTest price: ₹3,000–₹8,000 per contractor per month.\n\nWin condition: the buyer accepts the record and two contractors pay.\n\nMain threat: customer refusal to approve cannot be fixed by software.",
+      "details": [
+        "Indian interior fit-out or electrical subcontractors working on 3–10 concurrent projects, with a supervisor on site and an owner handling commercial matters. Start with one trade and one city.",
+        "A customer requests work outside the agreed scope during a site visit. If the request, quantity, price and authority are unclear, the contractor may struggle to include it in the bill. The proposed product creates a traceable request and approval record.",
+        "WhatsApp messages, photographs, paper measurement sheets, email, spreadsheets and construction-management systems. Formal buyer processes may already dictate exactly how changes must be submitted.",
+        "Potentially weekly across several active sites, with high impact on individual changes. Indian prevalence and typical amounts are not established by this research. Ask for actual rejected or delayed extra-work bills.",
+        "Clearstory offers dedicated change-order software [10]. A 2025 Clayco subcontract explicitly requires Clearstory for change submissions [11], which is stronger adoption evidence than a feature page. That evidence concerns a US contractor and cannot establish demand in Kerala.",
+        "Contact subcontractors through interior designers, electrical suppliers and public contractor listings. Seek introductions from summit mentors with construction businesses. A general student audience is not a substitute for interviews with paying owners.",
+        "Clearstory, Procore, Powerplay and existing buyer portals constrain the opportunity. Differentiate only if small subcontractors can capture evidence faster in their existing site workflow and produce buyer-accepted exports. Validate this against Powerplay rather than assuming it lacks the feature [12].",
+        "The main contractor may refuse external links or withhold approval intentionally. Site records are not automatic legal entitlement to payment. Contract terms, authority and jurisdiction matter. The product should preserve evidence and export it without claiming legal enforceability.",
+        "Review 20 historical changes with five contractors. Test a lightweight form and PDF summary on one live project per pilot. Charge ₹3,000 for a month. Continue only when the customer-side approver accepts the record and at least two contractors request paid continuation.",
+        "Photo attachment, scope and quantity, user-entered price, named approver, timestamps, version history and invoice-ready export. Exclude a full construction ERP, automatic legal notices, quantity surveying and AI-generated binding prices.",
+        "Test ₹3,000–₹8,000/month with active-project limits. At ₹5,000 revenue, assume ₹400 storage/messages plus ₹1,000 support labour, leaving ₹3,600 contribution. Two monthly support hours are assumed. Legal disputes or bespoke document formats can materially increase cost.",
+        "TEST FURTHER. A concrete pitch and expensive pain, but proceed only after proving approval acceptance. Buyer power is a larger risk than document generation."
+      ],
+      "price": 5000,
+      "cost": 1400,
+      "reason": "High-value pain, with a difficult two-party adoption risk",
+      "confidence": "Medium",
+      "rank": 3
+    },
+    {
+      "name": "Receivables dispute resolution",
+      "short": "Receivables exception tracking",
+      "raw": [
+        4.5,
+        3.5,
+        3.5,
+        4,
+        2.5,
+        4,
+        4
+      ],
+      "score": 76.0,
+      "refs": [
+        13,
+        14,
+        15
+      ],
+      "left": "Buyer: B2B distributors with a large overdue invoice queue.\n\nProblem: missing delivery evidence and unresolved disputes block collection.\n\nProposed gap: track why each invoice is blocked and who owns the next action.",
+      "right": "First offer: categorize 50 overdue invoices and assemble supporting records.\n\nTest price: ₹3,000–₹8,000 per company per month.\n\nWin condition: documented administrative blockers get resolved.\n\nMain threat: lack of buyer cash or bargaining power.",
+      "details": [
+        "Owner or finance manager of a distributor with at least 100 open B2B invoices and recurring disputed items. Avoid freelancers with a handful of clients, where manual follow-up is easy.",
+        "An overdue invoice remains unpaid because a purchase order, proof of delivery, credit note or approval is missing. The proposed product routes the blocker to an owner and records the next agreed action.",
+        "Tally or Busy ageing reports, spreadsheets, collectors, phone calls and automated reminder products. Receivables workflow must fit the existing books and retain correct balances.",
+        "Daily or weekly at sufficient invoice volume. Cash-flow severity is plausible, but the proportion caused by fixable paperwork rather than credit risk is unknown and must be measured.",
+        "C2FO’s report overview documents delayed payments as a structural MSME issue [13]. CredFlow already markets reminders and Tally/Busy access [14]. Older Chaser user reviews describe benefits and some costs or workflow limitations [15]. These are category signals, not proof of demand for this specific product.",
+        "Interview distributors through accountants and trade associations. A paid review of a redacted ageing report is a stronger entry offer than a dashboard demo. Obtain data access from the actual account owner.",
+        "CredFlow, Chaser and native accounting reminders already cover broad collection needs. The hypothesis is that documentation and dispute ownership form a valuable narrower workflow. Benchmark a live case against existing products.",
+        "Administrative problems may explain only a small share of the overdue balance. Software cannot force a powerful buyer to pay or repair insolvency. Connecting inconsistent accounting exports also creates onboarding cost.",
+        "Two distributors provide 50 overdue records each. Categorize causes, assemble missing evidence and record resolution events with finance staff. Charge ₹3,000. Continue if at least ten records per firm contain actionable administrative blockers and both firms pay to keep the queue current. Actual collected cash needs a longer follow-up and cannot all be attributed to the tool.",
+        "CSV import, blocker categories, evidence attachments, assigned owner, promise-to-pay date and audit trail. Exclude lending, payment custody, legal recovery and autonomous calls.",
+        "Test ₹3,000–₹8,000/month. Model ₹5,000 revenue less ₹500 infrastructure and ₹1,500 support, leaving ₹3,000 contribution. Require import consistency. Avoid percentage-of-recovered-cash pricing until attribution, contracts and applicable requirements are reviewed.",
+        "MODIFY AND TEST. A generic reminder app is weak. Advance only if interviews reveal repeatable paperwork blockers and willingness to pay beyond existing accounting tools."
+      ],
+      "price": 5000,
+      "cost": 2000,
+      "reason": "Severe pain but strong incumbents and structural payment delays",
+      "confidence": "Medium",
+      "rank": 4
+    },
+    {
+      "name": "Manufacturing RFQ intake",
+      "short": "Manufacturing quote preparation",
+      "raw": [
+        4,
+        3.5,
+        3,
+        4,
+        3.5,
+        4,
+        4
+      ],
+      "score": 74.0,
+      "refs": [
+        16,
+        17
+      ],
+      "left": "Buyer: small fabrication shops handling 30+ quote requests each month.\n\nProblem: incomplete specifications and revision confusion delay quotations.\n\nProposed gap: a complete quote packet with missing fields flagged for the estimator.",
+      "right": "First offer: prepare 30 historical RFQs against an estimator’s checklist.\n\nTest price: ₹5,000–₹12,000 per shop per month.\n\nWin condition: two shops pay and preparation time falls.\n\nMain threat: each shop needs different estimating logic.",
+      "details": [
+        "Owner or estimator at a sheet-metal fabrication shop with at least 30 RFQs per month. Restrict the first offer to one manufacturing process and ordinary commercial work.",
+        "An email arrives with drawings, revisions and quantities scattered across attachments. The estimator must discover missing information before costing. The product prepares the packet and tracks clarification, without guessing production prices.",
+        "Email folders, Excel logs, ERP quoting modules and specialist quoting products. The estimator’s own checklist is the baseline against which a new workflow must compete.",
+        "Weekly or daily for a sufficiently busy shop. Delayed response may lose a quote opportunity, but the causal relationship to win rate must not be assumed. First measure administrative time.",
+        "Paperless Parts markets quoting software and documents an email-to-quote preparation workflow [16,17]. The vendor brief includes a named customer example. This supports a paid category overseas, while Indian small-shop willingness to pay remains unknown.",
+        "Find fabrication businesses in one industrial cluster and request interviews with estimators. Machine-tool suppliers and manufacturing consultants are potential introduction channels. Access is less immediate than a local professional-services buyer.",
+        "Paperless Parts and ERP modules are substantial competitors. Test a lower-complexity intake and revision workflow for a particular process and local buyer. Do not claim that automated quoting or RFQ parsing is novel.",
+        "Data is commercially sensitive, request formats vary and missing specifications may require engineering judgment. Every customer might demand custom costing logic. That would turn a narrow product into bespoke software.",
+        "Use 30 historical RFQs from each of two shops with permission. Produce a completeness checklist and revision register manually. Ask an estimator to grade omissions and record minutes saved. Charge ₹5,000 for a live pilot only after the offline exercise. Proceed if preparation time drops at least 30% with no critical specification silently omitted.",
+        "Forwarded RFQ intake, attachment grouping, revision labels, required-field checklist and clarification drafts. Human review is mandatory. Exclude CAD geometry costing, autonomous price commitments and defense/export-controlled work in the first experiment.",
+        "Test ₹5,000–₹12,000/month with volume caps. Model ₹7,000 revenue minus ₹1,000 processing/storage and ₹1,500 support, leaving ₹4,500 contribution. Any machine-specific integration or consulting requires separate pricing.",
+        "TEST FURTHER. Attractive higher-value workflow for a founder with manufacturing access. It ranks below simpler options because domain learning and integration can absorb months."
+      ],
+      "price": 7000,
+      "cost": 2500,
+      "reason": "Higher-value workflow, with domain and access constraints",
+      "confidence": "Medium",
+      "rank": 5
+    },
+    {
+      "name": "Transport delivery-to-billing packets",
+      "short": "Transport billing readiness",
+      "raw": [
+        4,
+        3.5,
+        3,
+        4,
+        3,
+        4,
+        4
+      ],
+      "score": 73.0,
+      "refs": [
+        18,
+        19
+      ],
+      "left": "Buyer: regional transport firms whose bills depend on delivery paperwork.\n\nProblem: completed trips wait for usable proof of delivery.\n\nProposed gap: a buyer-specific checklist that makes each trip ready to bill.",
+      "right": "First offer: prepare billing packets for 100 trips using current records.\n\nTest price: ₹3,000–₹8,000 per fleet per month.\n\nWin condition: fewer trips remain blocked by missing evidence.\n\nMain threat: shippers still require original paper documents.",
+      "details": [
+        "Owner or billing clerk of a regional transporter operating roughly 10–50 vehicles and handling repeat commercial shippers. Select firms where delivery documentation demonstrably blocks billing.",
+        "The delivery is complete but the office lacks an acceptable delivery receipt or supporting charge record. A per-shipper readiness checklist reduces the gap between completed delivery and bill submission.",
+        "Driver WhatsApp photos, couriers carrying originals, paper trip folders, Excel and transport-management systems. Determine which buyers accept digital records before designing anything.",
+        "Every delivered load can generate work. The high-value event is a bill delayed by a correctable missing document, not merely a late photograph.",
+        "SuperProcure offers electronic proof of delivery and freight-accounting workflows [18,19]. This demonstrates active competition and commercial packaging. The research does not establish local fleet willingness to pay for a separate product.",
+        "Recruit through industrial shippers, fleet directories and transport accountants. A billing clerk’s acceptance is essential. Fleet size alone is not enough to qualify a buyer.",
+        "SuperProcure and existing TMS products are alternatives. A narrow packet checker might fit firms that will not replace their TMS, but this gap needs direct proof. Avoid promising guaranteed pickup or last-mile transport performance.",
+        "Shippers may require physical originals, and drivers may send unreadable images. Digital collection cannot change buyer policy. A direct driver app may face low adoption.",
+        "Inspect 100 completed trips from two fleets, record the cause and duration of billing blocks, then assemble packets manually. Charge ₹3,000 for a month. Continue only if most target shippers accept the output and document-related blocked trips decline at least 30%.",
+        "Trip import, receipt upload, readability flag, shipper-specific document checklist and a billing export. Exclude route optimization, GPS devices, fuel tracking, truck booking and document authenticity guarantees.",
+        "Test ₹3,000–₹8,000/month with trip limits. At ₹5,000 revenue, assume ₹700 processing/storage and ₹1,500 support, leaving ₹2,800 contribution. Price collection services separately if staff must repeatedly phone drivers.",
+        "TEST FURTHER through one transporter and one accepting shipper. Stop if original-paper requirements dominate the workflow."
+      ],
+      "price": 5000,
+      "cost": 2200,
+      "reason": "Frequent monetary workflow, limited by shipper acceptance",
+      "confidence": "Medium",
+      "rank": 6
+    },
+    {
+      "name": "Food-safety evidence operations",
+      "short": "Kitchen evidence records",
+      "raw": [
+        4,
+        3,
+        3.5,
+        4,
+        2.5,
+        4,
+        3
+      ],
+      "score": 70.5,
+      "refs": [
+        20,
+        21,
+        22
+      ],
+      "left": "Buyer: small multi-site caterers and central-kitchen operators.\n\nProblem: records and corrective actions scatter across sites before audits.\n\nProposed gap: daily evidence collection and a reviewed audit packet.",
+      "right": "First offer: manage records for two kitchens with a food-safety consultant.\n\nTest price: ₹1,000–₹2,500 per site per month.\n\nWin condition: staff consistently use it and the operator pays.\n\nMain threat: records can be completed without real safe practice.",
+      "details": [
+        "Operations head of a caterer or food business running 3–20 kitchens. Start with businesses already subject to customer audits or internal quality reviews, rather than every restaurant.",
+        "An audit, customer inspection or internal review requires records that are difficult to retrieve. The proposed product assigns evidence collection and corrective actions, then exports the records for qualified review.",
+        "Paper logs, spreadsheets, WhatsApp groups, consultants and general inspection software such as SafetyCulture. A simple shared form may be adequate.",
+        "Daily record activity with periodic audits creates potential recurring use. Actual requirements vary by establishment and activity. The FSSAI checklist is a source for workflow discovery, not a universal legal checklist to hard-code.",
+        "FSSAI publishes its hygiene rating scheme and a checklist showing evidence-oriented operational checks [20,21]. SafetyCulture markets inspection and corrective-action software [22]. This supports the workflow’s existence, not proven willingness to buy a new India-specific tool.",
+        "Food-safety consultants and catering operators are plausible channels. A consultant can help define correct requirements and recruit pilot sites. Neither a consultant partnership nor site access is confirmed.",
+        "SafetyCulture, consultants and paper logs already serve this need. Test site-based pricing and narrowly configured local evidence workflows. Do not build a consumer kitchen-rating marketplace or imply official certification.",
+        "Staff may backfill false records, owners may not pay until an incident, and a poorly defined checklist could create false confidence. Software cannot verify physical hygiene just because someone uploads a photo.",
+        "With a qualified consultant, run a 14-day manual evidence process in two kitchens. Charge ₹1,500/site for the pilot and monitor completion, retrieval time and corrective-action closure. Continue only if operators renew and at least 80% of scheduled entries arrive without founder chasing. Assess actual safety separately.",
+        "Assigned logs, timestamped submissions, document expiry reminders, issue ownership and evidence export. Exclude certification, food-quality diagnosis, legal compliance guarantees and sensor hardware.",
+        "Test ₹1,000–₹2,500/site/month, with a minimum company subscription. Model five sites at ₹1,500 = ₹7,500 revenue, less ₹1,000 infrastructure and ₹2,500 support/consultant allowance, leaving ₹4,000. Field inspections need separate service fees.",
+        "TEST WITH A DOMAIN PARTNER. Do not launch a compliance claim on software expertise alone. Attractive recurring operations, but trust and behaviour are substantial risks."
+      ],
+      "price": 7500,
+      "cost": 3500,
+      "reason": "Recurring records, with field-behaviour and expertise risk",
+      "confidence": "Medium",
+      "rank": 7
+    },
+    {
+      "name": "Marketplace recovery case preparation",
+      "short": "Marketplace recovery packets",
+      "raw": [
+        4,
+        3.5,
+        3,
+        3.5,
+        2,
+        4,
+        3.5
+      ],
+      "score": 69.0,
+      "refs": [
+        23,
+        24
+      ],
+      "left": "Buyer: marketplace sellers with 1,000+ monthly orders and repeated deduction disputes.\n\nProblem: finance staff find discrepancies but struggle to assemble claims.\n\nProposed gap: verified evidence packets for one recoverable exception type.",
+      "right": "First offer: audit 200 orders for one marketplace.\n\nTest price: ₹3,000–₹10,000 per seller per month.\n\nWin condition: eligible claims receive actual reimbursement.\n\nMain threat: incumbents already match orders, returns and payments.",
+      "details": [
+        "Finance operator at an Indian marketplace seller processing at least 1,000 monthly orders. Begin with a single marketplace and one exception, such as a specific shipping-fee discrepancy.",
+        "A settlement deduction fails to match the seller’s records and a claim window is approaching. The proposed tool organizes evidence and tracks the case through closure rather than showing only a mismatch.",
+        "CSV exports, Excel, accounting staff, marketplace portals, consultants and reconciliation software. Sellers may already outsource this work.",
+        "Repeated settlement cycles support regular work, but not every discrepancy is a valid claim. Actual recoverable value and deadlines must be established from current marketplace policy and seller records.",
+        "UniReco already reconciles orders, payments and returns across marketplaces and surfaces disputed transactions [23,24]. That is evidence of an established category and direct competition. There is no verified unmet claim-preparation gap yet.",
+        "Seller accountants and marketplace agencies could introduce qualified businesses. Offer a paid data audit with defined scope, not a broad promise to recover lost revenue.",
+        "Unicommerce’s UniReco is a strong direct competitor. A viable wedge requires an exception or claim workflow not adequately served by the seller’s existing system. Validate this with a current user, not a feature-list comparison alone.",
+        "Flagged discrepancies may be legitimate deductions. Policy changes, data formats and rejected claims can eliminate returns. Success fees can create disputed attribution.",
+        "With authorization, inspect 200 historical orders per seller for two sellers and one exception. Submit nothing automatically. Compare findings to the incumbent’s output and have the seller handle claims. Continue only after eligible claims convert to documented reimbursement and two sellers pay for repeat work.",
+        "CSV import, deterministic matching, policy-version references, evidence checklist and seller-approved claim drafts. Exclude an order-management system, warehouse system, all-marketplace integration and guaranteed recovery.",
+        "Test ₹3,000–₹10,000/month with order limits. Model ₹6,000 less ₹1,000 processing and ₹2,000 support, leaving ₹3,000 contribution. Verify current marketplace terms before any integration or submission workflow.",
+        "MODIFY OR STOP unless a narrow claim workflow produces incremental results beyond UniReco or the seller’s current provider."
+      ],
+      "price": 6000,
+      "cost": 3000,
+      "reason": "Measurable monetary value, but very crowded and integration-heavy",
+      "confidence": "Medium",
+      "rank": 8
+    },
+    {
+      "name": "Security-review answer preparation",
+      "short": "Security-review preparation",
+      "raw": [
+        4,
+        4,
+        2.5,
+        3,
+        2,
+        3.5,
+        2.5
+      ],
+      "score": 66.0,
+      "refs": [
+        25,
+        26
+      ],
+      "left": "Buyer: 10–50 person B2B software firms entering enterprise sales.\n\nProblem: customer security questionnaires interrupt engineering and delay review.\n\nProposed gap: reviewed, source-linked drafts for occasional questionnaires.",
+      "right": "First offer: complete one questionnaire with the customer’s security owner.\n\nTest price: ₹10,000–₹25,000 per reviewed packet.\n\nWin condition: a security expert approves the output and the buyer pays again.\n\nMain threat: trust and established automation vendors.",
+      "details": [
+        "CTO or security owner of a 10–50 person B2B software company selling to enterprise buyers. Qualify for recurring questionnaires and willingness to share sensitive policy documentation.",
+        "An enterprise prospect sends a security questionnaire during procurement. Engineers must assemble accurate evidence and maintain consistency with actual controls. Errors can undermine a sale and create material representations.",
+        "Past spreadsheets, policy documents, internal engineers, security consultants and automation platforms. Buyers can also use a general AI tool, so simple text generation offers little differentiation.",
+        "Frequency depends on enterprise deal flow. Occasional reviews favour a service price, while consistent monthly volume may justify a subscription. Do not force annual SaaS pricing onto sporadic demand.",
+        "Conveyor advertises Business starting at US$9,600/year [25] and source-linked questionnaire automation [26]. This shows a premium paid category, not an underserved market by itself. Current prices and included credits should be rechecked before procurement.",
+        "SaaS founders and technical consultancies offer a global route. IEDC may provide introductions, but most attendees will not be qualified buyers. A trusted security professional is necessary to make the offer credible.",
+        "Conveyor already provides cited answers, review workflows and portal automation [26]. The proposed niche is occasional, assisted preparation for smaller vendors. A lower price alone will not overcome a trust disadvantage.",
+        "Security-sensitive access, expert review cost and inaccurate claims could make this unsafe or uneconomic. A first-time founder without security expertise should not certify answers or invent controls.",
+        "Partner with a security practitioner. Use one consenting customer’s approved policies and questionnaire. Charge for a manually reviewed packet. Continue only if the expert confirms no unsupported assertions and the buyer pays for a second engagement. Time expert review separately.",
+        "Approved evidence library, cited draft answers, unsupported-answer flags, reviewer sign-off and spreadsheet export. Exclude compliance certification, autonomous submission and assertions about controls that do not exist.",
+        "Test ₹10,000–₹25,000 per packet. Model ₹15,000 revenue minus ₹1,000 secure processing and ₹6,000 expert review, leaving ₹8,000 contribution. This is per engagement, not monthly recurring revenue. Recurrence remains unproven.",
+        "DEFER unless a security expert and two qualified buyers are accessible. Higher contract values do not compensate for an absent trust foundation."
+      ],
+      "price": 15000,
+      "cost": 7000,
+      "reason": "Premium category, offset by trust and expert-review costs",
+      "confidence": "Medium",
+      "rank": 9
+    },
+    {
+      "name": "CBAM supplier evidence coordination",
+      "short": "CBAM evidence coordination",
+      "raw": [
+        4.5,
+        4,
+        2,
+        2.5,
+        2.5,
+        3.5,
+        1.5
+      ],
+      "score": 65.5,
+      "refs": [
+        27,
+        28
+      ],
+      "left": "Buyer: metal exporters responding to EU buyers’ emissions-data requests.\n\nProblem: supplier evidence and installation records are incomplete.\n\nProposed gap: a consultant-reviewed evidence collection workspace.",
+      "right": "First offer: organize one supplier data packet with a CBAM specialist.\n\nTest price: ₹15,000–₹40,000 per onboarding project.\n\nWin condition: the importer’s reviewer accepts the packet.\n\nMain threat: specialist calculations and changing requirements.",
+      "details": [
+        "An Indian steel or aluminium exporter with an EU buyer explicitly requesting installation-level emissions evidence for covered goods. Do not assume all exporters or every product are in scope.",
+        "The EU buyer asks for traceable supplier and production evidence. Missing or inconsistent data requires repeated coordination between the exporter, installation and specialist adviser. The narrow offer is evidence completeness and version control.",
+        "Spreadsheets, consultants, buyer templates, CarbonChain and other carbon-accounting products. A buyer’s chosen reporting platform may already prescribe the workflow.",
+        "Recurring reporting and supplier changes could sustain use, but onboarding may be the main paid event. Retention and reporting workload depend on each account.",
+        "The European Commission states that the definitive regime applies from 1 January 2026 and identifies importer obligations [27]. CarbonChain already offers supplier data exchange [28]. Regulatory need does not prove willingness to buy this proposed coordination layer.",
+        "Export consultants and engineering-export networks are plausible routes. Direct sales without domain credibility will be difficult. Secure a specialist partner before recruiting an exporter.",
+        "CarbonChain already targets supplier data coordination. Test only a specific local assisted workflow with a consultant. Avoid presenting basic carbon reporting or a supplier portal as unoccupied territory.",
+        "The founder lacks emissions-accounting expertise, supplier data may be unreliable and scope rules can change. The EU importer threshold cannot be applied casually as a simple Indian-exporter eligibility rule. Expert assessment of product and transaction scope is required.",
+        "Interview five exporters and two specialists. With one paid partner, organize a supplier evidence packet for a covered transaction. Proceed only when the buyer’s specialist accepts it and a second customer pays. Do not calculate or certify emissions without qualified review.",
+        "Request checklist, source-document storage, version control, missing-evidence queue and consultant sign-off. Exclude carbon-credit trading, tax estimation, independent verification and compliance guarantees.",
+        "Test ₹15,000–₹40,000 per onboarding project. At ₹25,000 revenue assume ₹2,000 secure processing and ₹12,000 specialist/delivery cost, leaving ₹11,000 contribution. This is project revenue. Annual recurring demand and professional liability costs remain unmeasured.",
+        "DEFER FOR NOW. Timely and potentially valuable, but a poor first bootstrapped bet without specialist capability and buyer access."
+      ],
+      "price": 25000,
+      "cost": 14000,
+      "reason": "Strong regulatory trigger, weak current founder fit",
+      "confidence": "Low",
+      "rank": 10
+    }
+  ]
+}

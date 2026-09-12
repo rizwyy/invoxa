@@ -1,0 +1,45 @@
+{
+  "name": "invoxa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "typecheck": "nuxt typecheck",
+    "postinstall": "nuxt prepare",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "build:backend": "node scripts/build-backend.mjs",
+    "typecheck:backend": "tsc -p tsconfig.backend.json",
+    "test:smoke": "node --import tsx scripts/smoke.ts",
+    "reminders:local": "node --import tsx scripts/reminders-local.ts"
+  },
+  "dependencies": {
+    "@aws-sdk/client-cognito-identity-provider": "^3.1131.0",
+    "@aws-sdk/client-dynamodb": "^3.1131.0",
+    "@aws-sdk/client-s3": "^3.1131.0",
+    "@aws-sdk/client-sesv2": "^3.1131.0",
+    "@aws-sdk/client-textract": "^3.1131.0",
+    "@aws-sdk/lib-dynamodb": "^3.1131.0",
+    "@aws-sdk/s3-presigned-post": "^3.1131.0",
+    "@aws-sdk/s3-request-presigner": "^3.1131.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "aws-jwt-verify": "^5.2.1",
+    "nuxt": "^4.5.2",
+    "pdf-lib": "^1.17.1",
+    "tailwindcss": "^4.0.0",
+    "vue": "^3.5.0",
+    "vue-router": "^5.3.1",
+    "zod": "^4.6.2"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.163",
+    "@types/node": "^24.13.4",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.0",
+    "vue-tsc": "^3.0.0"
+  },
+  "engines": {
+    "node": "^22.19.0 || ^24.11.0 || >=26.0.0"
+  }
+}
