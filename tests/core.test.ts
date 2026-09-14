@@ -10,7 +10,7 @@ import { LocalAuth } from '../backend/local-auth'
 import { InvoiceService } from '../backend/service'
 import { Conflict } from '../backend/repository'
 import { validateFile } from '../backend/files'
-import { normalizeExpense } from '../backend/extraction'
+import { findPossibleDuplicate, normalizeExpense } from '../backend/extraction'
 import { runReminders } from '../backend/reminders'
 import { csv, emptyFields, invoiceStatus, reminderInvoices, summary, toPaise, fieldsSchema, type Invoice } from '../shared/domain'
 const alice = { id: 'alice', email: 'alice@example.test' }; const bob = { id: 'bob', email: 'bob@example.test' }
@@ -55,6 +55,32 @@ test('concurrent quota requests cannot exceed configured cap', async t => { cons
 test('Textract maps conservative values and warns on ambiguity, low confidence and foreign currency', () => {
   const result = normalizeExpense([{ SummaryFields: [ { Type: { Text: 'TOTAL' }, ValueDetection: { Text: '₹49,560.00', Confidence: 99 }, Currency: { Code: 'INR' } }, { Type: { Text: 'INVOICE_RECEIPT_DATE' }, ValueDetection: { Text: '02/09/2026', Confidence: 80 } } ] }])
   assert.equal(result.fields.total, 4956000); assert.equal(result.fields.date, '2026-09-02'); assert.ok(result.warnings.some(s => s.includes('day/month'))); assert.ok(result.warnings.some(s => s.includes('confidence')))
+})
+test('Textract maps vendor details and editable line items while flagging weak item confidence', () => {
+  const result = normalizeExpense([{ SummaryFields: [
+    { Type: { Text: 'VENDOR_NAME' }, ValueDetection: { Text: 'ABC Traders', Confidence: 99 } },
+    { Type: { Text: 'INVOICE_RECEIPT_ID' }, ValueDetection: { Text: 'INV-1022', Confidence: 98 } },
+    { Type: { Text: 'INVOICE_RECEIPT_DATE' }, ValueDetection: { Text: '10/09/2026', Confidence: 99 } },
+    { Type: { Text: 'DUE_DATE' }, ValueDetection: { Text: '10/10/2026', Confidence: 76 } },
+    { Type: { Text: 'VENDOR_ADDRESS' }, ValueDetection: { Text: 'Kochi, Kerala', Confidence: 97 } },
+    { Type: { Text: 'TAX_PAYER_ID' }, ValueDetection: { Text: '32ABCDE1234F1Z5', Confidence: 96 } },
+    { Type: { Text: 'TOTAL' }, ValueDetection: { Text: '₹59,000.00', Confidence: 99 }, Currency: { Code: 'INR' } },
+  ], LineItemGroups: [{ LineItems: [{ LineItemExpenseFields: [
+    { Type: { Text: 'ITEM' }, ValueDetection: { Text: 'Office chairs', Confidence: 94 } },
+    { Type: { Text: 'QUANTITY' }, ValueDetection: { Text: '5', Confidence: 93 } },
+    { Type: { Text: 'UNIT_PRICE' }, ValueDetection: { Text: '₹10,000.00', Confidence: 88 } },
+    { Type: { Text: 'PRICE' }, ValueDetection: { Text: '₹50,000.00', Confidence: 92 } },
+  ] }] }] }])
+  assert.equal(result.fields.vendorAddress, 'Kochi, Kerala')
+  assert.equal(result.fields.vendorTaxId, '32ABCDE1234F1Z5')
+  assert.deepEqual(result.fields.lineItems?.[0], { description: 'Office chairs', quantity: 5, unitPrice: 1000000, amount: 5000000, confidence: 88 })
+  assert.ok(result.reviewFields.includes('due'))
+  assert.ok(result.reviewFields.includes('lineItems'))
+})
+test('duplicate detection requires the same normalized supplier, invoice number and amount', () => {
+  const candidate = invoice({ id: 'existing', vendor: 'ABC Traders Pvt. Ltd.', number: 'INV-1022', total: 5900000 })
+  assert.deepEqual(findPossibleDuplicate(invoice({ id: 'new', vendor: 'ABC Traders Pvt Ltd', number: 'INV 1022', total: 5900000 }), [candidate]), { invoiceId: 'existing', reason: 'matching-details' })
+  assert.equal(findPossibleDuplicate(invoice({ id: 'new', vendor: 'ABC Traders Pvt Ltd', number: 'INV 1022', total: 5900001 }), [candidate]), undefined)
 })
 test('reminders respect opt-in and payment state and are claimed once per day', async t => {
   const { service, files, repo } = await fixture(t); const i = await uploaded(service, files); await service.edit(alice, i.id, { ...fields(), version: i.version }); const w = (await service.workspace(alice))!

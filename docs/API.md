@@ -12,7 +12,7 @@ Local `/api` prefix; AWS API base is configured publicly. All business endpoints
 | POST | /uploads | `{name,type,size}` → `{invoice, upload:{url,fields?,method}}` |
 | POST | /invoices/:id/complete | `{}` → validated invoice / processing state |
 | GET | /invoices/:id/document | `{url,type}`; authenticated local URL or 60-second private S3 GET |
-| PATCH | /invoices/:id | All fields in `shared/domain.ts` + `version`, `acknowledged:true`, optional `acceptDifference:true` |
+| PATCH | /invoices/:id | Editable fields in `shared/domain.ts`, including vendor details and line items, + `version`, `acknowledged:true`, optional `acceptDifference:true` |
 | POST | /invoices/:id/action | `{action:paid|unpaid|archive|restore,version}` |
 | GET | /summary | Confirmed active record totals |
 | GET | /reminders/preview | Saved settings + qualifying invoices; does not send mail |
@@ -24,3 +24,5 @@ Local-only auth: POST /auth/signup and /auth/login with email/password; HTTP-onl
 AWS auth: Authorization Bearer access token. API Gateway JWT authorizer plus independent Cognito JWT signature/issuer/client/token-use checks in Lambda and GetUser email verification. Invalid/expired credentials → 401; no workspace → 403; other-tenant or nonexistent invoice → 404; invalid body → 400; conflict → 409; quota → 429.
 
 Original file reference, workspace ID, review status and extraction metadata are server-controlled. PATCH parses only allowed editable fields. CSV neutralizes formula prefixes. Permanent deletion requires a future retention workflow; archiving is reversible and keeps originals.
+
+AWS extraction metadata includes `source`, per-field `confidence`, `reviewFields`, user-facing `warnings`, and `completedAt`. A field enters `reviewFields` when confidence is below 90% or a required value was not found. Line items carry description, optional quantity, optional unit price, optional row amount and confidence. `duplicate` points to another invoice when the file hash matches or when normalized supplier + invoice number + total all match. These flags inform review; they do not silently reject or overwrite a record.

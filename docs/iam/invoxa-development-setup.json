@@ -1,0 +1,67 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "MumbaiCognitoAndDynamoDB",
+      "Effect": "Allow",
+      "Action": ["cognito-idp:*", "dynamodb:*"],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "ap-south-1"
+        }
+      }
+    },
+    {
+      "Sid": "InvoxaS3Buckets",
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": ["arn:aws:s3:::invoxa-*", "arn:aws:s3:::invoxa-*/*"]
+    },
+    {
+      "Sid": "S3ConsoleRead",
+      "Effect": "Allow",
+      "Action": ["s3:ListAllMyBuckets", "s3:GetAccountPublicAccessBlock"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "MumbaiMessagingSetup",
+      "Effect": "Allow",
+      "Action": ["sns:*", "sqs:*"],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "ap-south-1"
+        }
+      }
+    },
+    {
+      "Sid": "IamConsoleRead",
+      "Effect": "Allow",
+      "Action": ["iam:GetRole", "iam:ListRole*", "iam:GetPolicy*", "iam:ListPolicies"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "MumbaiLambdaDeployment",
+      "Effect": "Allow",
+      "Action": ["lambda:*", "apigateway:*"],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "ap-south-1"
+        }
+      }
+    },
+    {
+      "Sid": "PassInvoxaRolesToLambda",
+      "Effect": "Allow",
+      "Action": "iam:PassRole",
+      "Resource": "arn:aws:iam::YOUR_ACCOUNT_ID:role/invoxa-*",
+      "Condition": {
+        "StringEquals": {
+          "iam:PassedToService": "lambda.amazonaws.com"
+        }
+      }
+    }
+  ]
+}

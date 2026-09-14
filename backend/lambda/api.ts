@@ -12,6 +12,9 @@ export const handler: APIGatewayProxyHandlerV2 = async event => {
   const headers = { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' }
   const reply = (statusCode: number, body: unknown) => ({ statusCode, headers, body: JSON.stringify(body) })
   try {
+    // Browsers send an unauthenticated preflight before requests with a bearer token.
+    // API Gateway adds the configured CORS headers to this response.
+    if (event.requestContext.http.method === 'OPTIONS') return { statusCode: 204, headers }
     const token = event.headers.authorization?.match(/^Bearer (.+)$/i)?.[1]
     if (!token) throw new AppError(401, 'Please sign in')
     verifier ||= CognitoJwtVerifier.create({ userPoolId: process.env.COGNITO_USER_POOL_ID!, clientId: process.env.COGNITO_CLIENT_ID!, tokenUse: 'access' })

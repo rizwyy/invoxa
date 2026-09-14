@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ManageCognitoUserPoolsInMumbai",
+      "Effect": "Allow",
+      "Action": "cognito-idp:*",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": "ap-south-1"
+        }
+      }
+    },
+    {
+      "Sid": "ReadIamRolesAndPoliciesForAwsConsole",
+      "Effect": "Allow",
+      "Action": [
+        "iam:GetPolicy",
+        "iam:GetPolicyVersion",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "iam:ListPolicies",
+        "iam:ListRolePolicies",
+        "iam:ListRoles"
+      ],
+      "Resource": "*"
+    }
+  ]
+}

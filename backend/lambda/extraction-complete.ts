@@ -1,7 +1,7 @@
 import type { SQSHandler } from 'aws-lambda'
 import { TextractClient, GetExpenseAnalysisCommand, type ExpenseDocument } from '@aws-sdk/client-textract'
 import { DynamoRepository } from '../adapters/dynamo'
-import { normalizeExpense } from '../extraction'
+import { findPossibleDuplicate, normalizeExpense } from '../extraction'
 import { Conflict } from '../repository'
 import type { Invoice } from '../../shared/domain'
 const client = new TextractClient({})
@@ -27,7 +27,10 @@ export const handler: SQSHandler = async event => {
         do { const result = await client.send(new GetExpenseAnalysisCommand({ JobId: message.JobId, NextToken: next })); documents.push(...result.ExpenseDocuments || []); next = result.NextToken } while (next)
         const extracted = normalizeExpense(documents)
         Object.assign(invoice, extracted.fields)
-        invoice.extraction = { source: 'textract', confidence: extracted.confidence, warnings: [...invoice.extraction?.warnings || [], ...extracted.warnings] }
+        const candidates = (await repo.list(`WS#${invoice.workspaceId}`, 'INV#')).map(candidate => candidate.data as Invoice)
+        invoice.duplicate = findPossibleDuplicate(invoice, candidates)
+        const priorWarnings = (invoice.extraction?.warnings || []).filter(warning => !warning.startsWith('Possible duplicate'))
+        invoice.extraction = { source: 'textract', confidence: extracted.confidence, reviewFields: extracted.reviewFields, completedAt: new Date().toISOString(), warnings: [...new Set([...priorWarnings, ...extracted.warnings, ...(invoice.duplicate ? ['Possible duplicate detected. Compare the matching invoice before confirming this one.'] : [])])] }
         invoice.processing = 'needs-review'
       }
       invoice.version++; invoice.updatedAt = new Date().toISOString(); invoice.jobId = message.JobId

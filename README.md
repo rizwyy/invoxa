@@ -1,10 +1,10 @@
 # Invoxa
 
-Invoice management for Indian small businesses: upload a supplier bill, review its details, and track payment. Nuxt 4, Vue, TypeScript and Tailwind CSS, with a working local backend and separate AWS Lambda adapters.
+Automated supplier-invoice processing for Indian small businesses: upload a bill, let AWS Textract fill the record, review uncertain fields, and track payment. Built with Nuxt 4, Vue, TypeScript and Tailwind CSS, with a working local backend and separate AWS Lambda adapters.
 
 ![Invoxa before-and-after workflow](docs/portfolio/invoxa-before-after.png)
 
-**Status:** local core workflow implemented and tested. AWS integration code is supplied but has not been deployed or verified in a real AWS account. Do not describe this as a production-ready accounting platform.
+**Status:** the extraction, normalization, duplicate detection and exception-review workflow is implemented and tested in code. Local mode deliberately uses manual entry. AWS integration code is supplied but has not been deployed or verified in a real AWS account. Do not describe this as a production-ready accounting platform.
 
 ## Run locally
 
@@ -26,7 +26,8 @@ To move local test data out of the way without deleting it, stop the server and 
 - Local signup/login/logout, password hashing, persistent sessions, one owner per workspace.
 - Cognito hosted signup/login/recovery wiring with authorization code + PKCE for AWS mode.
 - PDF, JPEG and PNG uploads, file-size/type checks, PDF page limits, frozen originals, authenticated previews.
-- Manual invoice entry locally; asynchronous Textract extraction and confidence/date warnings in the AWS adapter.
+- Manual invoice entry locally; asynchronous Textract extraction in AWS mode for supplier, invoice number, dates, subtotal, GST, total, INR currency, vendor details and line items.
+- Per-field confidence scores, a 90% review threshold, editable extraction results and duplicate detection using file hash or supplier + invoice number + amount.
 - Review before confirmation; exact integer-paise amounts; required-field and total-difference checks.
 - Edit, mark fully paid/unpaid, archive/restore, optimistic-write conflict detection.
 - Search, supplier/status/date filters, active/archive views, pagination and CSV export.
@@ -58,7 +59,7 @@ The smoke test creates its own synthetic local account and PDF. The reminder com
 ### Try the user journey
 
 1. Create your local test account and workspace.
-2. Upload the supplied sample PDF; the source appears beside a blank manual-entry form.
+2. Upload the supplied sample PDF; in local mode the source appears beside a clearly labelled manual-entry review. In AWS mode, Textract fills the record asynchronously.
 3. Enter ABC Traders, INV-2041, 2026-09-02, due 2026-10-02, subtotal 42000, GST 7560, total 49560, unpaid.
 4. Change the total by one rupee: a difference acknowledgement appears. Restore the printed total.
 5. Check the review acknowledgement and confirm. The list should show ₹49,560 and Overview should include it as outstanding.
@@ -87,7 +88,9 @@ flowchart TD
   OCR --> SNS[SNS]
   SNS --> Q[SQS + dead-letter queue]
   Q --> WORK[Completion Lambda]
-  WORK --> DB
+  WORK --> NORMALIZE[Normalize + confidence checks]
+  NORMALIZE --> DUP[Duplicate + due-status logic]
+  DUP --> DB
   SCHED[EventBridge Scheduler] --> MAIL[Reminder Lambda]
   MAIL --> DB
   MAIL --> SES[SES owner emails]
@@ -95,7 +98,7 @@ flowchart TD
 
 ## Known limits / production gate
 
-- Real AWS integration, IAM, email delivery and OCR accuracy must be tested after configuration. Automatic extraction never runs locally.
+- Real AWS integration, IAM, email delivery and OCR accuracy must be tested after configuration. Automatic extraction never runs locally. The 90% review threshold is an initial product rule that must be calibrated on representative customer documents.
 - The AWS SPA retains its short-lived access token in sessionStorage; no automatic refresh is implemented. After expiry it asks for sign-in. Use strict CSP/HTTPS and review a server-session design before production.
 - PDF validation is not antivirus. JPEG/PNG validation checks file signatures; deploy malware scanning and stronger image validation for hostile production uploads.
 - No permanent-delete/retention workflow, invitations, partial payments, payment gateway, subscription billing, bank sync, GST compliance calculations, AI chat or RAG.

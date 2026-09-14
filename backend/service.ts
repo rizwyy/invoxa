@@ -3,6 +3,7 @@ import { z } from 'zod'
 import { emptyFields, fieldsSchema, workspaceSchema, uploadSchema, MAX_INVOICES, summary, reminderInvoices, type Identity, type Invoice, type Workspace } from '../shared/domain'
 import { AppError, Conflict, type Repository } from './repository'
 import { validateFile, type Files } from './files'
+import { findPossibleDuplicate } from './extraction'
 export interface Extractor { start(invoice: Invoice): Promise<string> }
 export class InvoiceService {
   constructor(public repo: Repository, public files: Files, public extractor?: Extractor) {}
@@ -54,18 +55,22 @@ export class InvoiceService {
     if (bytes.length !== i.file!.size) throw new AppError(400, 'Uploaded file size differs from the reserved size')
     let hash: string
     try { hash = await validateFile(bytes, i.file!.type) } catch (e) { i.processing = 'rejected'; i.failure = e instanceof Error ? e.message : 'Invalid document'; await this.save(i, i.version); await this.files.remove(i.file!.key).catch(() => {}); throw e }
-    const duplicate = (await this.list(user)).find(other => other.id !== i.id && !other.archived && other.file?.hash === hash)
+    const candidates = await this.list(user)
     // Freeze validated bytes under a key that cannot be overwritten by a browser upload grant.
     if (!this.files.write) throw new Error('Document writer is unavailable')
     const frozenKey = `documents/${i.workspaceId}/${i.id}`
     await this.files.write(frozenKey, bytes)
     i.file = { ...i.file!, key: frozenKey, hash }
+    i.duplicate = findPossibleDuplicate(i, candidates)
     i.processing = this.extractor ? 'processing' : 'needs-review'
-    i.extraction = { source: this.extractor ? 'textract' : 'manual', confidence: {}, warnings: [ ...(duplicate ? [`Possible duplicate of ${duplicate.number || duplicate.id}. Check before confirming.`] : []), ...(!this.extractor ? ['Local mode: extraction is not running. Enter the details from your document.'] : []) ] }
+    i.extraction = { source: this.extractor ? 'textract' : 'manual', confidence: {}, reviewFields: !this.extractor ? ['vendor', 'number', 'date', 'total'] : [], warnings: [ ...(i.duplicate ? ['Possible duplicate detected. Open the matching invoice before confirming this one.'] : []), ...(!this.extractor ? ['Local mode: extraction is not running. Enter the details from your document.'] : []) ] }
     i = await this.save(i, i.version)
     if (this.extractor) {
       await this.repo.put({ pk: `JOB#${i.id}`, sk: 'JOB', version: 1, data: { workspaceId: i.workspaceId, invoiceId: i.id } })
-      try { const jobId = await this.extractor.start(i); const current = await this.get(user, id); if (current.processing === 'processing') { current.jobId = jobId; i = await this.save(current, current.version) } } catch { const current = await this.get(user, id); if (current.processing === 'processing') { current.processing = 'failed'; current.failure = 'Extraction could not start. Enter the details manually.'; i = await this.save(current, current.version) } }
+      try { const jobId = await this.extractor.start(i); const current = await this.get(user, id); if (current.processing === 'processing') { current.jobId = jobId; i = await this.save(current, current.version) } } catch (error) {
+        console.error(JSON.stringify({ event: 'extraction_start_failure', invoiceId: i.id, errorType: error instanceof Error ? error.name : 'unknown', message: error instanceof Error ? error.message : 'unknown' }))
+        const current = await this.get(user, id); if (current.processing === 'processing') { current.processing = 'failed'; current.failure = 'Automatic extraction could not start. The original document is safe; enter the details manually or ask an administrator to check the processing logs.'; i = await this.save(current, current.version) }
+      }
     }
     await this.files.remove(`incoming/${i.workspaceId}/${i.id}`).catch(() => {})
     return i
@@ -79,7 +84,10 @@ export class InvoiceService {
     if (body.acknowledged !== true) throw new AppError(400, 'Confirm you reviewed the invoice')
     const fields = fieldsSchema.parse(body)
     if (fields.subtotal + fields.tax !== fields.total && body.acceptDifference !== true) throw new AppError(400, 'Acknowledge the difference between subtotal, tax and total')
-    return this.save({ ...i, ...fields, reviewed: true, processing: 'confirmed', failure: undefined, paidAt: fields.payment === 'paid' ? i.paidAt || new Date().toISOString() : null }, i.version)
+    const next = { ...i, ...fields, reviewed: true, processing: 'confirmed' as const, failure: undefined, paidAt: fields.payment === 'paid' ? i.paidAt || new Date().toISOString() : null }
+    next.duplicate = findPossibleDuplicate(next, await this.list(user))
+    if (next.extraction) next.extraction.warnings = [...next.extraction.warnings.filter(warning => !warning.startsWith('Possible duplicate')), ...(next.duplicate ? ['Possible duplicate detected. Compare the matching invoice before relying on this record.'] : [])]
+    return this.save(next, i.version)
   }
   async action(user: Identity, id: string, body: any) {
     const input = z.object({ version: z.number().int(), action: z.enum(['paid', 'unpaid', 'archive', 'restore']) }).parse(body)

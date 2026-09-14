@@ -124,7 +124,7 @@ Configure CORS centrally on API Gateway: exact frontend origins; methods GET, PO
 
 Create a standard SNS topic (name beginning with `AmazonTextract`, following Textract guidance), a standard SQS completion queue, and a dead-letter queue. Subscribe the queue to the SNS topic with **raw message delivery disabled**: the worker validates the SNS envelope TopicArn. Restrict queue policy to this topic. Configure the queue redrive policy, e.g. maxReceiveCount 5. Set queue visibility timeout at least six times worker timeout. Attach completion Lambda via event source mapping with **ReportBatchItemFailures** enabled. Create a DLQ depth alarm.
 
-Textract produces suggestions only. Missing due dates remain blank, ambiguous numeric dates get a warning, and currency/low-confidence warnings appear in review. A manual confirmation takes precedence over a late OCR result. No automatic retry of failed extraction is exposed, preventing repeated per-page charges; manual entry is always available after a valid upload. Inspect failed jobs / DLQ to recover genuine failures.
+Textract produces suggestions only. The completion worker maps standard expense fields for supplier, invoice number, invoice/due dates, subtotal, tax, total, INR currency, vendor address/tax ID and available line items. It stores confidence scores and adds fields below 90% to `reviewFields`; missing required values are also highlighted. Dates are normalized conservatively and foreign currency is blocked for review because this pilot stores INR only. The worker then checks supplier + invoice number + total against the workspace and links a possible duplicate. A manual confirmation takes precedence over a late OCR result. No automatic retry of failed extraction is exposed, preventing repeated per-page charges; manual entry is always available after a valid upload. Inspect failed jobs / DLQ to recover genuine failures.
 
 ## 7. Optional email reminders
 
@@ -144,7 +144,7 @@ Production headers: CSP appropriate to your exact API, Cognito and S3 origins; `
 2. Create two users/workspaces; tamper with invoice IDs on GET/PATCH/action/document/complete. All cross-tenant access must fail.
 3. Upload a real representative English INR PDF and a photo; confirm the frozen original is accessible only via authorized short-lived links.
 4. Attempt wrong size/type, expired POST, incoming replay, incomplete upload and >10 pages. No unauthorized extraction or cross-tenant access.
-5. Verify completion SNS → SQS, manual review during processing, duplicate message delivery and DLQ behavior.
+5. Verify completion SNS → SQS, every mapped field and confidence score, low-confidence highlighting, editable corrections, supplier/number/amount duplicate detection, manual review during processing, duplicate message delivery and DLQ behavior.
 6. Confirm totals against a known invoice set, archived exclusion, date boundaries and optimistic-write conflicts.
 7. Test SES only with consenting test addresses: opt-in, no duplicates, paid exclusion, unsubscribe, failure alarm.
 8. Check CloudWatch for leaks, underlying usage costs, lifecycle behavior, backup restore, CSP and rate limits.

@@ -5,10 +5,20 @@ export const MAX_INVOICES = 1000
 export const currencies = ['INR'] as const
 const date = z.string().refine(v => /^\d{4}-\d{2}-\d{2}$/.test(v) && !isNaN(Date.parse(v)) && new Date(v).toISOString().slice(0, 10) === v, 'Use a valid calendar date')
 const amount = z.number().int().min(0).max(100_000_000_000)
+export const lineItemSchema = z.object({
+  description: z.string().trim().max(500),
+  quantity: z.number().min(0).max(1_000_000).nullable(),
+  unitPrice: amount.nullable(),
+  amount: amount.nullable(),
+  confidence: z.number().min(0).max(100).nullable(),
+})
+export type LineItem = z.infer<typeof lineItemSchema>
 export const fieldsSchema = z.object({
   vendor: z.string().trim().min(1).max(200), number: z.string().trim().min(1).max(100),
   date, due: z.union([date, z.literal('')]), subtotal: amount, tax: amount, total: amount.positive(),
   currency: z.enum(currencies), payment: z.enum(['paid', 'unpaid']), notes: z.string().max(2000),
+  vendorAddress: z.string().trim().max(1000).default(''), vendorTaxId: z.string().trim().max(100).default(''),
+  lineItems: z.array(lineItemSchema).max(200).default([]),
 })
 export type Fields = z.infer<typeof fieldsSchema>
 export interface Invoice extends Fields {
@@ -16,7 +26,8 @@ export interface Invoice extends Fields {
   processing: 'rejected' | 'awaiting-upload' | 'needs-review' | 'processing' | 'failed' | 'confirmed';
   createdAt: string; updatedAt: string; paidAt: string | null;
   file?: { name: string; type: string; size: number; key: string; hash?: string };
-  extraction?: { source: 'textract' | 'manual' | 'demo'; confidence: Record<string, number>; warnings: string[] };
+  extraction?: { source: 'textract' | 'manual' | 'demo'; confidence: Record<string, number>; warnings: string[]; reviewFields?: string[]; completedAt?: string };
+  duplicate?: { invoiceId: string; reason: 'same-file' | 'matching-details' };
   failure?: string; jobId?: string;
 }
 export interface Workspace { id: string; name: string; ownerId: string; email: string; reminders: boolean; reminderDays: number; version: number }
@@ -64,9 +75,9 @@ export const money = (paise: number) => new Intl.NumberFormat('en-IN', { style: 
 export const dateLabel = (value: string) => value ? new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${value}T00:00:00Z`)) : 'Not provided'
 export function csv(invoices: Invoice[]) {
   const cell = (value: unknown) => { let s = String(value ?? ''); if (/^[\s]*[=+@-]/.test(s)) s = `'${s}`; return `"${s.replaceAll('"', '""')}"` }
-  return [['Vendor', 'Invoice number', 'Invoice date', 'Due date', 'Subtotal INR', 'GST INR', 'Total INR', 'Status', 'Notes'], ...invoices.map(i => [i.vendor, i.number, i.date, i.due, (i.subtotal / 100).toFixed(2), (i.tax / 100).toFixed(2), (i.total / 100).toFixed(2), invoiceStatus(i), i.notes])].map(r => r.map(cell).join(',')).join('\r\n')
+  return [['Vendor', 'Vendor address', 'GST / tax ID', 'Invoice number', 'Invoice date', 'Due date', 'Subtotal INR', 'GST INR', 'Total INR', 'Line items', 'Status', 'Notes'], ...invoices.map(i => [i.vendor, i.vendorAddress || '', i.vendorTaxId || '', i.number, i.date, i.due, (i.subtotal / 100).toFixed(2), (i.tax / 100).toFixed(2), (i.total / 100).toFixed(2), (i.lineItems || []).map(item => item.description).filter(Boolean).join('; '), invoiceStatus(i), i.notes])].map(r => r.map(cell).join(',')).join('\r\n')
 }
 export function reminderInvoices(invoices: Invoice[], workspace: Workspace, day = today()) {
   return invoices.filter(i => i.reviewed && !i.archived && i.payment === 'unpaid' && i.due && i.due <= plusDays(day, workspace.reminderDays))
 }
-export const emptyFields = (): Fields => ({ vendor: '', number: '', date: '', due: '', subtotal: 0, tax: 0, total: 0, currency: 'INR', payment: 'unpaid', notes: '' })
+export const emptyFields = (): Fields => ({ vendor: '', number: '', date: '', due: '', subtotal: 0, tax: 0, total: 0, currency: 'INR', payment: 'unpaid', notes: '', vendorAddress: '', vendorTaxId: '', lineItems: [] })
