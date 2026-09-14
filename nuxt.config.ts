@@ -8,5 +8,5 @@ export default defineNuxtConfig({
   ...(process.env.INVOXA_NUXT_BUILD_DIR ? { buildDir: process.env.INVOXA_NUXT_BUILD_DIR } : {}),
   css: ['~/assets/css/main.css'],
   vite: { plugins: [tailwindcss()], cacheDir: process.env.INVOXA_VITE_CACHE_DIR || 'node_modules/.cache/vite' },
-  app: { head: { title: 'Invoxa · Invoice workspace', meta: [{ name: 'description', content: 'A local prototype for reviewing and organizing supplier invoices.' }] } },
+  app: { head: { title: 'Invoxa · Invoice workspace', meta: [{ name: 'description', content: 'Automated supplier-invoice processing with AWS Textract and human review.' }] } },
 })
