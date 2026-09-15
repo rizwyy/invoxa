@@ -12,13 +12,18 @@ import { Conflict } from '../backend/repository'
 import { validateFile } from '../backend/files'
 import { findPossibleDuplicate, normalizeExpense } from '../backend/extraction'
 import { runReminders } from '../backend/reminders'
-import { csv, emptyFields, invoiceStatus, reminderInvoices, summary, toPaise, fieldsSchema, type Invoice } from '../shared/domain'
+import { csv, emptyFields, invoiceStatus, reminderInvoices, summary, toPaise, fieldsSchema, normalizeRoutePath, type Invoice } from '../shared/domain'
 const alice = { id: 'alice', email: 'alice@example.test' }; const bob = { id: 'bob', email: 'bob@example.test' }
 async function fixture(t: any) { const dir = await mkdtemp(join(tmpdir(), 'invoxa-test-')); t.after(() => rm(dir, { recursive: true, force: true })); const repo = new LocalRepository(dir); const files = new LocalFiles(dir); return { repo, files, service: new InvoiceService(repo, files), dir } }
 async function pdf() { const doc = await PDFDocument.create(); doc.addPage().drawText('Sample invoice: total INR 118.00'); return doc.save() }
 async function uploaded(service: InvoiceService, files: LocalFiles) { await service.createWorkspace(alice, { name: 'Alice business' }); const bytes = await pdf(); const result = await service.reserve(alice, { name: 'bill.pdf', type: 'application/pdf', size: bytes.length }); await files.write(result.invoice.file!.key, bytes); return service.complete(alice, result.invoice.id) }
 function fields() { return { vendor: 'Supplier', number: 'INV-1', date: '2026-09-01', due: '2026-09-12', subtotal: 10000, tax: 1800, total: 11800, currency: 'INR', payment: 'unpaid', notes: '', acknowledged: true } }
 function invoice(patch: Partial<Invoice> = {}): Invoice { return { ...emptyFields(), id: 'i', workspaceId: 'w', version: 1, reviewed: true, archived: false, processing: 'confirmed', createdAt: '', updatedAt: '', paidAt: null, total: 11800, tax: 1800, date: '2026-09-01', due: '2026-09-12', ...patch } }
+test('route paths normalize trailing slashes for callback auth guarding', () => {
+  assert.equal(normalizeRoutePath('/auth/callback/'), '/auth/callback')
+  assert.equal(normalizeRoutePath('/login/'), '/login')
+  assert.equal(normalizeRoutePath('/'), '/')
+})
 test('money and dates reject precision loss and impossible dates', () => { assert.equal(toPaise('49.56'), 4956); assert.equal(toPaise('0.29'), 29); assert.ok(Number.isNaN(toPaise('1.001'))); assert.ok(Number.isNaN(toPaise('1e4'))); assert.equal(fieldsSchema.safeParse({ ...fields(), date: '2026-02-30' }).success, false) })
 test('overdue boundaries, missing due dates, paid and unreviewed totals', () => {
   assert.equal(invoiceStatus(invoice(), '2026-09-12'), 'Due today')

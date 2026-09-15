@@ -21,6 +21,13 @@ export const fieldsSchema = z.object({
   lineItems: z.array(lineItemSchema).max(200).default([]),
 })
 export type Fields = z.infer<typeof fieldsSchema>
+export function normalizeRoutePath(path: string) {
+  if (!path || path === '/') return '/'
+  const withoutHash = path.split('#')[0]
+  const withoutQuery = withoutHash.split('?')[0]
+  const cleaned = withoutQuery.replace(/\/+$/, '') || '/'
+  return cleaned.startsWith('/') ? cleaned : `/${cleaned}`
+}
 export interface Invoice extends Fields {
   id: string; workspaceId: string; version: number; reviewed: boolean; archived: boolean;
   processing: 'rejected' | 'awaiting-upload' | 'needs-review' | 'processing' | 'failed' | 'confirmed';

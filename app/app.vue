@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import { normalizeRoutePath } from '../shared/domain'
 const { account, logout } = useAccount(); const route = useRoute(); const config = useRuntimeConfig().public
-const publicPage = computed(() => ['/', '/login', '/auth/callback'].includes(route.path))
+const publicPage = computed(() => ['/', '/login', '/auth/callback'].includes(normalizeRoutePath(route.path)))
 const error = ref('')
 async function signOut() { try { await logout() } catch (e: any) { error.value = e.message } }
 </script>
