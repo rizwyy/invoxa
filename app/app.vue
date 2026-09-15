@@ -1,8 +1,68 @@
 <script setup lang="ts">
-import { normalizeRoutePath } from '../shared/domain'
-const { account, logout } = useAccount(); const route = useRoute(); const config = useRuntimeConfig().public
-const publicPage = computed(() => ['/', '/login', '/auth/callback'].includes(normalizeRoutePath(route.path)))
-const error = ref('')
-async function signOut() { try { await logout() } catch (e: any) { error.value = e.message } }
+import { normalizeRoutePath } from "../shared/domain";
+const { account, logout } = useAccount();
+const route = useRoute();
+const config = useRuntimeConfig().public;
+const publicPage = computed(() =>
+  ["/", "/login", "/auth/callback"].includes(normalizeRoutePath(route.path)),
+);
+const error = ref("");
+async function signOut() {
+  try {
+    await logout();
+  } catch (e: any) {
+    error.value = e.message;
+  }
+}
 </script>
-<template><NuxtPage v-if="publicPage" /><div v-else class="shell"><a href="#main" class="skip-link">Skip to content</a><aside class="sidebar"><NuxtLink class="brand" to="/dashboard"><span class="brand-mark">i</span> invoxa<span class="brand-dot">.</span></NuxtLink><div class="workspace"><span class="workspace-icon">{{ account?.workspace?.name.slice(0, 1).toUpperCase() || 'B' }}</span><div>{{ account?.workspace?.name || 'Your business' }}<small>Owner workspace</small></div></div><p class="nav-label">WORKSPACE</p><nav aria-label="Main navigation"><NuxtLink to="/dashboard" class="nav-item">▦ Overview</NuxtLink><NuxtLink to="/invoices" class="nav-item">▤ Invoices</NuxtLink><NuxtLink to="/upload" class="nav-item">↑ Process invoice</NuxtLink><NuxtLink to="/settings" class="nav-item">⚙ Settings</NuxtLink></nav><div class="sidebar-bottom"><span class="local-dot"></span>{{ config.appMode === 'local' ? 'Local mode' : 'Connected workspace' }}<p>Invoices processed. Exceptions reviewed.</p><button class="signout" @click="signOut">Sign out →</button></div></aside><div class="main-shell"><header class="topbar"><span>{{ account?.workspace?.name || 'Invoxa' }} <span class="slash">/</span> Invoice workspace</span><button class="text-link mobile-signout" @click="signOut">Sign out</button></header><div v-if="config.appMode === 'local'" class="demo-banner"><strong>LOCAL</strong> Data stays on this computer. Uploads use manual entry; AWS Textract and email are not called.</div><p v-if="error" class="error" role="alert">{{ error }}</p><main id="main"><NuxtPage /></main></div></div></template>
+<template>
+  <NuxtPage v-if="publicPage" />
+  <div v-else class="shell">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <aside class="sidebar">
+      <NuxtLink class="brand" to="/dashboard"
+        ><span class="brand-mark">i</span> invoxa<span class="brand-dot"
+          >.</span
+        ></NuxtLink
+      >
+      <div class="workspace">
+        <span class="workspace-icon">{{
+          account?.workspace?.name.slice(0, 1).toUpperCase() || "B"
+        }}</span>
+        <div>
+          {{ account?.workspace?.name || "Your business"
+          }}<small>Owner workspace</small>
+        </div>
+      </div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav aria-label="Main navigation">
+        <NuxtLink to="/dashboard" class="nav-item">▦ Overview</NuxtLink
+        ><NuxtLink to="/invoices" class="nav-item">▤ Invoices</NuxtLink
+        ><NuxtLink to="/upload" class="nav-item">↑ Process invoice</NuxtLink
+        ><NuxtLink to="/settings" class="nav-item">⚙ Settings</NuxtLink>
+      </nav>
+      <div class="sidebar-bottom">
+        <span class="local-dot"></span
+        >{{ config.appMode === "local" ? "Local mode" : "Connected workspace" }}
+        <p>Invoices processed. Exceptions reviewed.</p>
+        <button class="signout" @click="signOut">Sign out →</button>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar">
+        <span
+          >{{ account?.workspace?.name || "Invoxa" }}
+          <span class="slash">/</span> Invoice workspace</span
+        ><button class="text-link mobile-signout" @click="signOut">
+          Sign out
+        </button>
+      </header>
+      <div v-if="config.appMode === 'local'" class="demo-banner">
+        <strong>LOCAL</strong> Data stays on this computer. Uploads use manual
+        entry; AWS Textract and email are not called.
+      </div>
+      <p v-if="error" class="error" role="alert">{{ error }}</p>
+      <main id="main"><NuxtPage /></main>
+    </div>
+  </div>
+</template>
