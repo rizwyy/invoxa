@@ -1,6 +1,7 @@
 [build]
   command = "npm run generate"
-  publish = ".output/public"
+  # Netlify's Nuxt integration writes the generated static site to dist.
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "24.11.0"

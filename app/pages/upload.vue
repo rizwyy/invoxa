@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { MAX_BYTES, type Invoice, type UploadUsage } from '../../shared/domain'
+import { DEMO_UPLOAD_LIMIT, MAX_BYTES, type Invoice, type UploadUsage } from '../../shared/domain'
 const config = useRuntimeConfig().public; const api = useApi(); const file = ref<File | null>(null); const error = ref(''); const busy = ref(false); const stage = ref(''); const dragging = ref(false); const invoiceId = ref(''); const usage = ref<UploadUsage | null>(null); const limitModal = ref(false); const closeButton = ref<HTMLButtonElement | null>(null)
 const limitReached = computed(() => usage.value?.remaining === 0)
-async function loadUsage() { try { usage.value = await api<UploadUsage>('/usage'); if (limitReached.value) openLimitModal() } catch (e: any) { error.value = e.message } }
+async function loadUsage() { try { usage.value = await api<UploadUsage>('/usage') } catch (e: any) { if (e.status !== 404) { error.value = e.message; return } const invoices = await api<Invoice[]>('/invoices'); usage.value = { used: invoices.length, limit: DEMO_UPLOAD_LIMIT, remaining: Math.max(0, DEMO_UPLOAD_LIMIT - invoices.length) } } if (limitReached.value) openLimitModal() }
 function openLimitModal() { limitModal.value = true; nextTick(() => closeButton.value?.focus()) }
 function closeLimitModal() { limitModal.value = false }
 function choose(files: FileList | null) { if (busy.value) return; if (limitReached.value) { openLimitModal(); return } error.value = ''; invoiceId.value = ''; file.value = null; const f = files?.[0]; if (!f) return; if (!['application/pdf', 'image/jpeg', 'image/png'].includes(f.type)) { error.value = 'Choose a PDF, JPEG or PNG file.'; return } if (f.size > MAX_BYTES || !f.size) { error.value = 'Choose a file between 1 byte and 8 MB.'; return } file.value = f }
@@ -24,7 +24,7 @@ async function upload() {
     stage.value = config.appMode === 'local' ? 'Preparing your review…' : 'Starting automatic invoice processing…'
     await api(`/invoices/${invoiceId.value}/complete`, { method: 'POST', body: {} })
     await navigateTo(`/invoices/${invoiceId.value}`)
-  } catch (e: any) { if (e.status === 429) { usage.value = { used: usage.value?.limit || 2, limit: usage.value?.limit || 2, remaining: 0 }; openLimitModal() } else error.value = e.message } finally { busy.value = false; stage.value = '' }
+  } catch (e: any) { if (e.status === 429) { usage.value = { used: usage.value?.limit || DEMO_UPLOAD_LIMIT, limit: usage.value?.limit || DEMO_UPLOAD_LIMIT, remaining: 0 }; openLimitModal() } else error.value = e.message } finally { busy.value = false; stage.value = '' }
 }
 onMounted(loadUsage)
 </script>
