@@ -52,7 +52,7 @@ function resetDemo() {
     <a class="skip-link" href="#home-content">Skip to content</a>
     <div class="home-dark">
       <header class="home-nav home-container">
-        <NuxtLink to="/" class="home-brand" aria-label="Invoxa home"><span class="home-brand-mark">i</span>invoxa<span class="home-brand-dot">.</span></NuxtLink>
+        <NuxtLink to="/" class="home-brand" aria-label="Invoxa home"><InvoxaLogo /></NuxtLink>
         <nav class="home-desktop-nav" aria-label="Homepage navigation">
           <a href="#how-it-works">How it works</a>
           <a href="#the-difference">Why Invoxa</a>
@@ -163,7 +163,7 @@ function resetDemo() {
 
         <section class="home-final-cta" aria-labelledby="cta-heading"><div class="home-container home-cta-inner"><div><p class="home-eyebrow">MAKE A LITTLE ROOM FOR WHAT’S NEXT</p><h2 id="cta-heading">Close the tabs.<br>Find your <span class="home-serif">headspace.</span></h2></div><div><NuxtLink :to="workspaceLink" class="home-button home-button-dark">Open your workspace <HomeIcon name="arrow" /></NuxtLink><p>One bill is a good place to start.</p></div><span class="home-cta-flower" aria-hidden="true">✳</span></div></section>
       </main>
-      <footer class="home-footer home-container"><div><NuxtLink to="/" class="home-brand" aria-label="Invoxa home"><span class="home-brand-mark">i</span>invoxa<span class="home-brand-dot">.</span></NuxtLink><p>Supplier bills, kept in order.</p></div><div class="home-footer-note"><span class="home-live-dot"></span>{{ config.appMode === 'local' ? 'Local project demo' : 'Invoxa project' }}<p>Made for a little more clarity.</p></div><a href="https://github.com/rizwyy/invoxa" target="_blank" rel="noopener noreferrer">Explore the project <HomeIcon name="arrow" /></a></footer>
+      <footer class="home-footer home-container"><div><NuxtLink to="/" class="home-brand" aria-label="Invoxa home"><InvoxaLogo compact /></NuxtLink><p>Supplier bills, kept in order.</p></div><div class="home-footer-note"><span class="home-live-dot"></span>{{ config.appMode === 'local' ? 'Local project demo' : 'Invoxa project' }}<p>Made for a little more clarity.</p></div><a href="https://github.com/rizwyy/invoxa" target="_blank" rel="noopener noreferrer">Explore the project <HomeIcon name="arrow" /></a></footer>
     </div>
   </div>
 </template>

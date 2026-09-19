@@ -11,9 +11,7 @@
 .home-dark{background:var(--home-dark);color:var(--home-cream)}
 .invoxa-home .home-main{max-width:none;padding:0;margin:0}
 .home-nav{height:112px;display:flex;align-items:center;justify-content:space-between;gap:30px}
-.home-brand{display:inline-flex;align-items:center;font-size:32px;font-weight:650;letter-spacing:-1.8px;color:var(--home-cream)}
-.home-brand-mark{display:grid;place-items:center;background:var(--home-lime);width:34px;height:37px;border-radius:9px;color:var(--home-ink);font-size:30px;font-weight:800;margin-right:9px;line-height:1;letter-spacing:-1px}
-.home-brand-dot{color:var(--home-lime)}
+.home-brand{display:inline-flex;align-items:center;color:var(--home-cream);--invoxa-logo-accent:var(--home-lime)}
 .home-desktop-nav{display:flex;gap:30px;margin-left:30px;font-size:13px;color:#c2d1cd}
 .home-desktop-nav a,.home-sign-in{transition:color .2s}
 .home-desktop-nav a:hover,.home-sign-in:hover{color:var(--home-lime)}
@@ -200,8 +198,6 @@
 .home-cta-inner>div:nth-child(2)>p{text-align:center;font-size:10px;margin-top:14px;color:#56753c}
 .home-cta-flower{font-size:245px;line-height:1;position:absolute;right:-95px;bottom:-63px;color:#a9de67;z-index:-1;transform:rotate(15deg)}
 .home-footer{padding:43px 0;display:flex;justify-content:space-between;align-items:center;gap:25px}
-.home-footer .home-brand{font-size:26px}
-.home-footer .home-brand-mark{width:26px;height:29px;font-size:23px;border-radius:6px}
 .home-footer p{font-size:10px;color:#9cb49f;margin-top:12px}
 .home-footer-note{font-size:10px;color:#b8cdb3}
 .home-footer-note .home-live-dot{width:5px;height:5px;margin-right:7px}

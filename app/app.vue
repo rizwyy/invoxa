@@ -20,11 +20,7 @@ async function signOut() {
   <div v-else class="shell">
     <a href="#main" class="skip-link">Skip to content</a>
     <aside class="sidebar">
-      <NuxtLink class="brand" to="/dashboard"
-        ><span class="brand-mark">i</span> invoxa<span class="brand-dot"
-          >.</span
-        ></NuxtLink
-      >
+      <NuxtLink class="brand" to="/dashboard" aria-label="Invoxa workspace"><InvoxaLogo /></NuxtLink>
       <div class="workspace">
         <span class="workspace-icon">{{
           account?.workspace?.name.slice(0, 1).toUpperCase() || "B"
