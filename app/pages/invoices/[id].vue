@@ -5,6 +5,8 @@ interface DraftLineItem { description: string; quantity: string; unitPrice: stri
 
 const route = useRoute()
 const api = useApi()
+const config = useRuntimeConfig().public
+const { used: textractUsed, limit: textractLimit, limitReached: textractLimitReached, load: loadTextractUsage, recordSuccessfulExtraction, recordExtractionFailed } = useTextractUsage()
 const invoice = ref<Invoice | null>(null)
 const draft = reactive({ ...emptyFields(), subtotal: '', tax: '', total: '', lineItems: [] as DraftLineItem[] })
 const acknowledged = ref(false)
@@ -16,6 +18,7 @@ const documentError = ref('')
 const documentUrl = ref('')
 const loaded = ref(false)
 const confirmArchive = ref(false)
+const extractionLimitModal = ref(false)
 let timer: ReturnType<typeof setTimeout> | undefined
 let alive = true
 let polls = 0
@@ -65,6 +68,11 @@ async function refresh() {
     if (!alive) return
     invoice.value = i
     if (!dirty.value) setDraft(i)
+    if (config.appMode === 'aws' && i.extraction?.source === 'textract' && i.extraction.completedAt) {
+      const counted = recordSuccessfulExtraction(i.id)
+      if (counted && textractLimitReached.value) extractionLimitModal.value = true
+    }
+    if (config.appMode === 'aws' && i.processing === 'failed') recordExtractionFailed(i.id)
     await loadDocument()
     if (i.processing === 'processing' && ++polls < 30) timer = setTimeout(refresh, 4000)
     else if (i.processing === 'processing') slowProcessing.value = true
@@ -114,7 +122,7 @@ async function action(action: 'paid' | 'unpaid' | 'archive' | 'restore') {
 }
 
 onBeforeRouteLeave(() => { if (dirty.value && !window.confirm('Discard your unsaved invoice changes?')) return false })
-onMounted(refresh)
+onMounted(() => { loadTextractUsage(); refresh() })
 onUnmounted(() => { alive = false; clearTimeout(timer); if (documentUrl.value) URL.revokeObjectURL(documentUrl.value) })
 </script>
 
@@ -164,4 +172,5 @@ onUnmounted(() => { alive = false; clearTimeout(timer); if (documentUrl.value) U
       </form>
     </div>
   </template>
+  <ExtractionLimitModal :open="extractionLimitModal" :used="textractUsed" :limit="textractLimit" @close="extractionLimitModal = false" />
 </template>

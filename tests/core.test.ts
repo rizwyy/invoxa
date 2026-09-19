@@ -20,7 +20,6 @@ import {
   summary,
   toPaise,
   fieldsSchema,
-  DEMO_UPLOAD_LIMIT,
   normalizeRoutePath,
   type Invoice,
 } from "../shared/domain";
@@ -229,26 +228,6 @@ test("concurrent quota requests cannot exceed configured cap", async (t) => {
     Array.from({ length: 8 }, () => service.consumeQuota("test", "day", 3)),
   );
   assert.equal(results.filter((r) => r.status === "fulfilled").length, 3);
-});
-test("public demo allows two invoice uploads and reports no remaining allowance", async (t) => {
-  const { service } = await fixture(t);
-  await service.createWorkspace(alice, { name: "Alice business" });
-  for (let count = 0; count < DEMO_UPLOAD_LIMIT; count++) {
-    await service.reserve(alice, {
-      name: `bill-${count}.pdf`,
-      type: "application/pdf",
-      size: 100,
-    });
-  }
-  assert.deepEqual(await service.uploadUsage(alice), {
-    used: DEMO_UPLOAD_LIMIT,
-    limit: DEMO_UPLOAD_LIMIT,
-    remaining: 0,
-  });
-  await assert.rejects(
-    () => service.reserve(alice, { name: "third.pdf", type: "application/pdf", size: 100 }),
-    /two|2 invoice extractions/i,
-  );
 });
 test("Textract maps conservative values and warns on ambiguity, low confidence and foreign currency", () => {
   const result = normalizeExpense([

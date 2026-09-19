@@ -33,9 +33,9 @@ To move local test data out of the way without deleting it, stop the server and 
 - Search, supplier/status/date filters, active/archive views, pagination and CSV export.
 - Outstanding/overdue/due-soon totals, monthly invoice/GST amounts and top suppliers.
 - Saved opt-in reminder preferences and local preview; daily SES reminder Lambda with deduplication.
-- Workspace isolation, conditional quota counters and limited API bodies; AWS JWT checks and verified-email lookup.
+- Workspace isolation, bounded pilot upload guards and limited API bodies; AWS JWT checks and verified-email lookup.
 
-Public demo limits: INR, supplier bills, one invoice per file, 8 MB, 10 PDF pages and two lifetime invoice upload reservations per workspace. Failed or abandoned reservations consume the allowance because they can create storage or processing cost. Unconfirmed/archived bills are excluded from summaries. "This month's recorded bills" uses invoice date, not payment date. Overdue calculations use today's date in Asia/Kolkata.
+Public demo limits: INR, supplier bills, one invoice per file, 8 MB and 10 PDF pages. The website UI allows three successful Textract extractions per browser session and records completed invoice IDs in `sessionStorage`; failed extractions do not count. This is a lightweight demo control, not a server-enforced billing or abuse boundary. Unconfirmed/archived bills are excluded from summaries. "This month's recorded bills" uses invoice date, not payment date. Overdue calculations use today's date in Asia/Kolkata.
 
 ## Verify
 

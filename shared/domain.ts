@@ -1,7 +1,7 @@
 import { z } from "zod";
 export const MAX_BYTES = 8 * 1024 * 1024;
 export const MAX_PAGES = 10;
-export const DEMO_UPLOAD_LIMIT = 2;
+export const MAX_INVOICES = 1000;
 export const currencies = ["INR"] as const;
 const date = z
   .string()
@@ -90,11 +90,6 @@ export interface Workspace {
 export interface Identity {
   id: string;
   email: string;
-}
-export interface UploadUsage {
-  used: number;
-  limit: number;
-  remaining: number;
 }
 export const workspaceSchema = z.object({
   name: z.string().trim().min(2).max(100),

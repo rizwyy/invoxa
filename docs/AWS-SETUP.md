@@ -4,7 +4,7 @@ No resources have been provisioned or deployed by this project. Local mode perfo
 
 ## Scope and architecture
 
-The public demo supports supplier invoices in INR, one owner per workspace, full paid/unpaid state, archival rather than permanent deletion, and two lifetime upload reservations per workspace. Each invoice has at most 10 PDF pages / 8 MB. Failed or abandoned reservations consume quota deliberately because they can create storage or processing cost; contact the operator to reset a quota after investigation. No billing subscription, accounting ledger, GST filing, team invitations, partial payments, bank reconciliation, Bedrock or RAG.
+The public demo supports supplier invoices in INR, one owner per workspace, full paid/unpaid state, archival rather than permanent deletion, and three successful Textract extractions per browser session. The counter is stored in browser `sessionStorage`; failed extractions do not count. Each invoice has at most 10 PDF pages / 8 MB. No billing subscription, accounting ledger, GST filing, team invitations, partial payments, bank reconciliation, Bedrock or RAG.
 
 Frontend (Nuxt SPA) → Cognito authorization code + PKCE → API Gateway HTTP API → API Lambda → DynamoDB + S3 + Textract. Textract → SNS → SQS → completion Lambda. EventBridge Scheduler → reminder Lambda → SES.
 
@@ -29,7 +29,7 @@ Check the AWS console for current **Mumbai** availability, Free Plan eligibility
 | IAM roles/policies | Allow services only the required operations | No additional IAM fee | Detach/delete when resources are gone |
 | Frontend hosting + domain | Serve the built SPA over HTTPS | Provider-specific; separate from the Lambda bundles | Remove deployment and renewals |
 
-Example only: AWS publishes an Oregon AnalyzeExpense example at $0.01/page. 1,000 pages would be $10 for extraction at that rate, before other services and taxes. Verify Mumbai pricing rather than treating this as your bill. The two-upload allowance is per workspace, not an account-wide financial hard cap. Restrict pilot signup/invites operationally and set concurrency/throttling to constrain abuse.
+Example only: AWS publishes an Oregon AnalyzeExpense example at $0.01/page. 1,000 pages would be $10 for extraction at that rate, before other services and taxes. Verify Mumbai pricing rather than treating this as your bill. The three-extraction browser-session allowance is a UX control, not an account-wide financial hard cap. Restrict pilot signup/invites operationally and use AWS budgets/throttling if cost protection becomes necessary.
 
 Official pricing: https://aws.amazon.com/cognito/pricing/ · https://aws.amazon.com/textract/pricing/ · https://aws.amazon.com/dynamodb/pricing/on-demand/ · https://aws.amazon.com/s3/pricing/ · https://aws.amazon.com/lambda/pricing/ · https://aws.amazon.com/api-gateway/pricing/ · https://aws.amazon.com/sqs/pricing/ · https://aws.amazon.com/sns/pricing/ · https://aws.amazon.com/eventbridge/pricing/ · https://aws.amazon.com/ses/pricing/ · https://aws.amazon.com/cloudwatch/pricing/
 
