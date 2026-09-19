@@ -5,9 +5,10 @@ Local `/api` prefix; AWS API base is configured publicly. All business endpoints
 | Method | Path | Body / response |
 | --- | --- | --- |
 | GET | /me | `{user, workspace}`; workspace may be null |
+| GET | /usage | `{used, limit, remaining}` for the two-upload public demo allowance |
 | POST | /workspace | `{name}` → workspace |
 | PATCH | /workspace | `{name, reminders, reminderDays, version}` |
-| GET | /invoices | Complete workspace-scoped pilot list (max 1,000 reservations); frontend filters/paginates |
+| GET | /invoices | Complete workspace-scoped demo list; frontend filters/paginates |
 | GET | /invoices/:id | Invoice |
 | POST | /uploads | `{name,type,size}` → `{invoice, upload:{url,fields?,method}}` |
 | POST | /invoices/:id/complete | `{}` → validated invoice / processing state |
@@ -22,6 +23,8 @@ Money is integer paise, currency INR. Dates are YYYY-MM-DD with no timezone; due
 Local-only auth: POST /auth/signup and /auth/login with email/password; HTTP-only opaque session cookie; POST /auth/logout deletes session. No password reset or verification email in local mode. Local upload PUT /local-upload/:id and GET /local-file/:id require that session. Local mutation requests must include the matching Origin and Content-Length. This adapter supports one local process only; do not share its data directory between processes.
 
 AWS auth: Authorization Bearer access token. API Gateway JWT authorizer plus independent Cognito JWT signature/issuer/client/token-use checks in Lambda and GetUser email verification. Invalid/expired credentials → 401; no workspace → 403; other-tenant or nonexistent invoice → 404; invalid body → 400; conflict → 409; quota → 429.
+
+The public demo permits two lifetime invoice upload reservations per workspace. `GET /usage` returns `{ used, limit, remaining }`; the third `POST /uploads` returns `429`. Archiving or deleting browser data does not restore the allowance.
 
 Original file reference, workspace ID, review status and extraction metadata are server-controlled. PATCH parses only allowed editable fields. CSV neutralizes formula prefixes. Permanent deletion requires a future retention workflow; archiving is reversible and keeps originals.
 

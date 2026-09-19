@@ -1,6 +1,6 @@
 import { randomUUID, createHash } from 'node:crypto'
 import { z } from 'zod'
-import { emptyFields, fieldsSchema, workspaceSchema, uploadSchema, MAX_INVOICES, summary, reminderInvoices, type Identity, type Invoice, type Workspace } from '../shared/domain'
+import { emptyFields, fieldsSchema, workspaceSchema, uploadSchema, DEMO_UPLOAD_LIMIT, summary, reminderInvoices, type Identity, type Invoice, type UploadUsage, type Workspace } from '../shared/domain'
 import { AppError, Conflict, type Repository } from './repository'
 import { validateFile, type Files } from './files'
 import { findPossibleDuplicate } from './extraction'
@@ -34,15 +34,22 @@ export class InvoiceService {
       const pk = `WS#${workspaceId}`; const sk = `QUOTA#${name}`
       const row = await this.repo.get(pk, sk)
       const count = row?.data.count || 0
-      if (count >= limit) throw new AppError(429, `Pilot upload limit reached (${limit} ${name === 'total' ? 'total' : 'per day'}).`)
+      if (count >= limit) throw new AppError(429, name === 'total' ? `You have used the ${limit} invoice extractions included in this public demo.` : `Daily upload limit reached (${limit} per day).`)
       try { await this.repo.put({ pk, sk, version: (row?.version || 0) + 1, data: { count: count + 1 } }, row?.version || 0); return } catch (e) { if (!(e instanceof Conflict)) throw e }
     }
     throw new AppError(429, 'Too many simultaneous uploads. Try again shortly.')
   }
+  async uploadUsage(user: Identity): Promise<UploadUsage> {
+    const w = await this.requireWorkspace(user)
+    const row = await this.repo.get(`WS#${w.id}`, 'QUOTA#total')
+    const used = Math.max(0, Number(row?.data.count) || 0)
+    return { used, limit: DEMO_UPLOAD_LIMIT, remaining: Math.max(0, DEMO_UPLOAD_LIMIT - used) }
+  }
   async reserve(user: Identity, body: unknown) {
     const w = await this.requireWorkspace(user); const file = uploadSchema.parse(body)
-    await this.consumeQuota(w.id, new Date().toISOString().slice(0, 10), 50)
-    await this.consumeQuota(w.id, 'total', MAX_INVOICES)
+    // Reserve the lifetime demo allowance before issuing a storage upload grant.
+    // This is enforced server-side so clearing browser storage cannot reset it.
+    await this.consumeQuota(w.id, 'total', DEMO_UPLOAD_LIMIT)
     const id = randomUUID(); const now = new Date().toISOString()
     const invoice: Invoice = { ...emptyFields(), id, workspaceId: w.id, version: 1, reviewed: false, archived: false, processing: 'awaiting-upload', createdAt: now, updatedAt: now, paidAt: null, file: { ...file, key: `incoming/${w.id}/${id}` } }
     await this.repo.put({ pk: `WS#${w.id}`, sk: `INV#${id}`, version: 1, data: invoice }, 0)
@@ -100,6 +107,7 @@ export class InvoiceService {
   async handle(user: Identity, method: string, path: string, body: any) {
     if (['POST', 'PATCH'].includes(method) && (!body || typeof body !== 'object' || Array.isArray(body))) throw new AppError(400, 'A JSON object is required')
     if (method === 'GET' && path === '/me') return { user, workspace: await this.workspace(user) || null }
+    if (method === 'GET' && path === '/usage') return this.uploadUsage(user)
     if (path === '/workspace' && method === 'POST') return this.createWorkspace(user, body)
     if (path === '/workspace' && method === 'PATCH') return this.updateWorkspace(user, body)
     if (path === '/invoices' && method === 'GET') return this.list(user)

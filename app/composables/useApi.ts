@@ -33,11 +33,13 @@ export function useApi() {
         )
           await router.push("/login?expired=1");
       }
-      throw new Error(
+      const error = new Error(
         e.data?.message ||
           e.data?.statusMessage ||
           "Unable to complete the request. Please try again.",
-      );
+      ) as Error & { status?: number };
+      error.status = e.statusCode || e.status || e.response?.status;
+      throw error;
     }
   };
 }

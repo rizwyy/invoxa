@@ -35,7 +35,7 @@ To move local test data out of the way without deleting it, stop the server and 
 - Saved opt-in reminder preferences and local preview; daily SES reminder Lambda with deduplication.
 - Workspace isolation, conditional quota counters and limited API bodies; AWS JWT checks and verified-email lookup.
 
-Pilot limits: INR, supplier bills, one invoice per file, 8 MB, 10 PDF pages, 50 upload reservations per workspace per UTC day, 1,000 reservations total. Unconfirmed/archived bills are excluded from summaries. "This month's recorded bills" uses invoice date, not payment date. Overdue calculations use today's date in Asia/Kolkata.
+Public demo limits: INR, supplier bills, one invoice per file, 8 MB, 10 PDF pages and two lifetime invoice upload reservations per workspace. Failed or abandoned reservations consume the allowance because they can create storage or processing cost. Unconfirmed/archived bills are excluded from summaries. "This month's recorded bills" uses invoice date, not payment date. Overdue calculations use today's date in Asia/Kolkata.
 
 ## Verify
 
