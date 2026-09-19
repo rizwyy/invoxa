@@ -39,8 +39,8 @@ export const fieldsSchema = z.object({
 export type Fields = z.infer<typeof fieldsSchema>;
 export function normalizeRoutePath(path: string) {
   if (!path || path === "/") return "/";
-  const withoutHash = path.split("#")[0];
-  const withoutQuery = withoutHash.split("?")[0];
+  const [withoutHash = ""] = path.split("#", 1);
+  const [withoutQuery = ""] = withoutHash.split("?", 1);
   const cleaned = withoutQuery.replace(/\/+$/, "") || "/";
   return cleaned.startsWith("/") ? cleaned : `/${cleaned}`;
 }
